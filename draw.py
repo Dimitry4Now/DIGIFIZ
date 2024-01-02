@@ -2,6 +2,8 @@
 A place for my main draw functions.
 Just an attempt to clean up the main file.
 '''
+from datetime import datetime
+
 from main import *
 
 
@@ -33,8 +35,7 @@ def mileage():
     try:
         tripometer = int(response3)
     except:
-        print
-        "Error: Trip read from file is not an int"
+        print("Error: Trip read from file is not an int")
         error_reading_odo_from_file = 1
     odofile.close()
 
@@ -63,7 +64,7 @@ def draw_clock():
 
 def draw_fuel_text():
     global digital_font
-    digital_fuel = fuel_status
+    digital_fuel = 75
     fuel_text = digital_font.render(str(int(digital_fuel)), True, NEON_GREEN)
     text_rect = fuel_text.get_rect()
     text_rect.midright = 1717, 667
@@ -101,29 +102,48 @@ def draw_indicators():
     The area where I blit or draw the indicators/idiot lights and turn signals/low fuel etc.
 
     '''
-
+    illumination_state = 1
     if illumination_state == 1:
         WIN.blit(indicator_images[0], (45, 460))
+
+    foglight_state = 1
     if foglight_state == 1:
         WIN.blit(indicator_images[1], (185, 460))
+
+    defog_state = 1
     if defog_state == 1:
         WIN.blit(indicator_images[2], (325, 460))
+
+    highbeam_state = 1
     if highbeam_state == 1:
         WIN.blit(indicator_images[3], (465, 460))
+
+    leftturn_state = 1
     if leftturn_state == 1:
         WIN.blit(indicator_images[4], (605, 460))
+
+    rightturn_state = 1
     if rightturn_state == 1:
         WIN.blit(indicator_images[5], (1220, 460))
+
+    brakewarn_state = 1
     if brakewarn_state == 1:
         WIN.blit(indicator_images[6], (1360, 460))
+
+    oillight_state = 1
     if oillight_state == 1:
         WIN.blit(indicator_images[7], (1500, 460))
+
+    alt_state = 1
     if alt_state == 1:
         WIN.blit(indicator_images[8], (1640, 460))
+
+    glow_state = 1
     if glow_state == 1:
         WIN.blit(indicator_images[9], (1780, 460))
 
     #   To highlight the fuel reserve indicator (factory is at 7 litres
+    fuel_status = 7
     if fuel_status <= 7:
         WIN.blit(fuelresOn, (1795, 616))
     else:

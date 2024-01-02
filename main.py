@@ -18,15 +18,12 @@
 
 """
 
-
+# import mqtt.client as mqttClient
 import pygame
-from datetime import datetime
-import paho.mqtt.client as mqttClient
-from rpm.rpm import RpmGauge
 from aux_gauge.AuxGauge import AuxGauge
 from constants import *
-from variables import *
 from draw import *
+from rpm.rpm import RpmGauge
 
 #   Import pygame, for main graphics functions
 #   Date time is for the clock and perhaps MQTT
@@ -67,136 +64,136 @@ for i in range(10):
 ######
 
 
-def on_connect(client, userdata, flags, rc):
-    if rc == 0:
-        print("Connected to broker")
-        global Connected  # Use global variable
-        Connected = True  # Signal connection
-    else: print("Connection failed")
+# def on_connect(client, userdata, flags, rc):
+#    if rc == 0:
+#        print("Connected to broker")
+#        global Connected  # Use global variable
+#        Connected = True  # Signal connection
+#    else: print("Connection failed")
 
 
-def on_message(client, userdata, message): print(message.topic + " " + message.payload.decode())
+# def on_message(client, userdata, message): print(message.topic + " " + message.payload.decode())
 
 
 ######
 #       ENGINE TOPIC MQTT
 ######
 
-def on_message_rpm(digi, obj, message):
-    rpm_mqtt = int((message.payload.decode()))
-    rpm.set_frame(rpm_mqtt)
+#def on_message_rpm(digi, obj, message):
+#    rpm_mqtt = int((message.payload.decode()))
+#    rpm.set_frame(rpm_mqtt)
 
 
-def on_message_coolant(digi, obj, message):
-    coolant_mqtt = int((message.payload.decode()))
-    coolant.set_frame(coolant_mqtt)
+#def on_message_coolant(digi, obj, message):
+#    coolant_mqtt = int((message.payload.decode()))
+#    coolant.set_frame(coolant_mqtt)
 
 
-def on_message_egt(digi, obj, message):
-    egt_mqtt = int((message.payload.decode()))
-    egt.set_frame(egt_mqtt)
+#def on_message_egt(digi, obj, message):
+#    egt_mqtt = int((message.payload.decode()))
+#    egt.set_frame(egt_mqtt)
 
 
-def on_message_oilpressure(digi, obj, message):
-    oilpressure_mqtt = int((message.payload.decode()))
-    oilpressure.set_frame(oilpressure_mqtt)
+#def on_message_oilpressure(digi, obj, message):
+#    oilpressure_mqtt = int((message.payload.decode()))
+#    oilpressure.set_frame(oilpressure_mqtt)
 
 
-def on_message_boost(digi, obj, message):
-    boost_mqtt = int((message.payload.decode()))
-    boost.set_frame(boost_mqtt)
+#def on_message_boost(digi, obj, message):
+#    boost_mqtt = int((message.payload.decode()))
+#    boost.set_frame(boost_mqtt)
 
 
 ######
 #       CABIN TOPIC MQTT
 ######
 
-def on_message_speed_cv(digi, obj, message):
-    global speed_status
-    speed_cv_mqtt = int((message.payload.decode()))
-    speed_status = speed_cv_mqtt
+#def on_message_speed_cv(digi, obj, message):
+#    global speed_status
+#    speed_cv_mqtt = int((message.payload.decode()))
+#    speed_status = speed_cv_mqtt
 
 
-def on_message_speed_gps(digi, obj, message):
-    global speed_gps_status
-    speed_gps_mqtt = int((message.payload.decode()))
-    speed_gps_status = speed_gps_mqtt
+#def on_message_speed_gps(digi, obj, message):
+#    global speed_gps_status
+#    speed_gps_mqtt = int((message.payload.decode()))
+#    speed_gps_status = speed_gps_mqtt
 
 
-def on_message_outside_temp(digi, obj, message):
-    global outside_temp_status
-    outside_temp_mqtt = int((message.payload.decode()))
-    outside_temp_status = outside_temp_mqtt
+#def on_message_outside_temp(digi, obj, message):
+#    global outside_temp_status
+#    outside_temp_mqtt = int((message.payload.decode()))
+#    outside_temp_status = outside_temp_mqtt
 
 
-def on_message_fuel(digi, obj, message):
-    global fuel_status
-    fuel_mqtt = int((message.payload.decode()))
-    fuel_status = fuel_mqtt
+#def on_message_fuel(digi, obj, message):
+#    global fuel_status
+#    fuel_mqtt = int((message.payload.decode()))
+#    fuel_status = fuel_mqtt
 
 
 ######
 #       INDICATOR TOPIC MQTT
 ######
 
-def on_message_illumination(digi, obj, message):
-    global illumination_state
-    illumination_mqtt = int((message.payload.decode()))
-    illumination_state = illumination_mqtt
+#def on_message_illumination(digi, obj, message):
+#    global illumination_state
+#    illumination_mqtt = int((message.payload.decode()))
+#    illumination_state = illumination_mqtt
 
 
-def on_message_foglight(digi, obj, message):
-    global foglight_state
-    foglight_mqtt = int((message.payload.decode()))
-    foglight_state = foglight_mqtt
+#def on_message_foglight(digi, obj, message):
+#    global foglight_state
+#    foglight_mqtt = int((message.payload.decode()))
+#    foglight_state = foglight_mqtt
 
 
-def on_message_defog(digi, obj, message):
-    global defog_state
-    defog_mqtt = int((message.payload.decode()))
-    defog_state = defog_mqtt
+#def on_message_defog(digi, obj, message):
+#    global defog_state
+#    defog_mqtt = int((message.payload.decode()))
+#    defog_state = defog_mqtt
 
 
-def on_message_highbeam(digi, obj, message):
-    global highbeam_state
-    highbeam_mqtt = int((message.payload.decode()))
-    highbeam_state = highbeam_mqtt
+#def on_message_highbeam(digi, obj, message):
+#    global highbeam_state
+#    highbeam_mqtt = int((message.payload.decode()))
+#    highbeam_state = highbeam_mqtt
 
 
-def on_message_leftturn(digi, obj, message):
-    global leftturn_state
-    leftturn_mqtt = int((message.payload.decode()))
-    leftturn_state = leftturn_mqtt
+#def on_message_leftturn(digi, obj, message):
+#    global leftturn_state
+#    leftturn_mqtt = int((message.payload.decode()))
+#    leftturn_state = leftturn_mqtt
 
 
-def on_message_rightturn(digi, obj, message):
-    global rightturn_state
-    rightturn_mqtt = int((message.payload.decode()))
-    rightturn_state = rightturn_mqtt
+#def on_message_rightturn(digi, obj, message):
+#    global rightturn_state
+#    rightturn_mqtt = int((message.payload.decode()))
+#    rightturn_state = rightturn_mqtt
 
 
-def on_message_brakewarn(digi, obj, message):
-    global brakewarn_state
-    brakewarn_mqtt = int((message.payload.decode()))
-    brakewarn_state = brakewarn_mqtt
+#def on_message_brakewarn(digi, obj, message):
+#    global brakewarn_state
+#    brakewarn_mqtt = int((message.payload.decode()))
+#    brakewarn_state = brakewarn_mqtt
 
 
-def on_message_oillight(digi, obj, message):
-    global oillight_state
-    oillight_mqtt = int((message.payload.decode()))
-    oillight_state = oillight_mqtt
+#def on_message_oillight(digi, obj, message):
+#    global oillight_state
+#    oillight_mqtt = int((message.payload.decode()))
+#    oillight_state = oillight_mqtt
 
 
-def on_message_alt(digi, obj, message):
-    global alt_state
-    alt_mqtt = int((message.payload.decode()))
-    alt_state = alt_mqtt
+#def on_message_alt(digi, obj, message):
+#    global alt_state
+#    alt_mqtt = int((message.payload.decode()))
+#    alt_state = alt_mqtt
 
 
-def on_message_glow(digi, obj, message):
-    global glow_state
-    glow_mqtt = int((message.payload.decode()))
-    glow_state = glow_mqtt
+#def on_message_glow(digi, obj, message):
+#    global glow_state
+#    glow_mqtt = int((message.payload.decode()))
+#    glow_state = glow_mqtt
 
 
 ######
@@ -228,8 +225,7 @@ def mileage():
     try:
         tripometer = int(response3)
     except:
-        print
-        "Error: Trip read from file is not an int"
+        print("Error: Trip read from file is not an int")
         error_reading_odo_from_file = 1
     odofile.close()
 
@@ -245,7 +241,7 @@ def mileage():
 
 def draw_fuel_text():
     #global digital_font
-    digital_fuel = fuel_status
+    digital_fuel = 55
     fuel_text = digital_font.render(str(int(digital_fuel)), True, NEON_GREEN)
     text_rect = fuel_text.get_rect()
     text_rect.midright = 1717, 667
@@ -258,7 +254,7 @@ def draw_speedometer_text():
     '''
     #global speed_status
     #global font_speedunits
-    speedtext = font_speedunits.render(str(speed_status), True, NEON_YELLOW)
+    speedtext = font_speedunits.render(str(37), True, NEON_YELLOW)
     text_rect = speedtext.get_rect()
     text_rect.midright = SPEEDO_XY
     WIN.blit(speedtext, text_rect)
@@ -271,7 +267,7 @@ def draw_mfa():
 
     WIN.blit(MFA, MFABG_XY)
     #   Draw MFA display
-    text = digital_font.render(str(outside_temp_status), True, NEON_GREEN)
+    text = digital_font.render(str(23), True, NEON_GREEN)
     #   Enables the text to be right center aligned
     text_rect = text.get_rect()
     text_rect.midright = MFA_XY
@@ -284,29 +280,49 @@ def draw_indicators():
     '''
     The area where I blit or draw the indicators/idiot lights and turn signals/low fuel etc.
     '''
-
+    illumination_state = 1
     if illumination_state == 1:
         WIN.blit(indicator_images[0], (45, 460))
+
+    foglight_state = 1
     if foglight_state == 1:
         WIN.blit(indicator_images[1], (185, 460))
+
+    defog_state = 1
     if defog_state == 1:
         WIN.blit(indicator_images[2], (325, 460))
+
+    highbeam_state = 1
     if highbeam_state == 1:
         WIN.blit(indicator_images[3], (465, 460))
+
+    leftturn_state= 1
     if leftturn_state == 1:
         WIN.blit(indicator_images[4], (605, 460))
+
+    rightturn_state = 1
     if rightturn_state == 1:
         WIN.blit(indicator_images[5], (1220, 460))
+
+    brakewarn_state = 1
     if brakewarn_state == 1:
         WIN.blit(indicator_images[6], (1360, 460))
+
+    oillight_state = 1
     if oillight_state == 1:
         WIN.blit(indicator_images[7], (1500, 460))
+
+    alt_state = 1
     if alt_state == 1:
         WIN.blit(indicator_images[8], (1640, 460))
+
+    glow_state = 1
     if glow_state == 1:
         WIN.blit(indicator_images[9], (1780, 460))
 
+
     #   To highlight the fuel reserve indicator (factory is at 7 litres
+    fuel_status = 7
     if fuel_status <= 7:
         WIN.blit(fuelresOn, (1795, 616))
     else:
@@ -335,11 +351,11 @@ def main():
     #   MQTT Variables
     broker_address = "localhost"  # Broker address
     port = 1883  # Broker port
-    client = mqttClient.Client("pytest")  # create new instance
-    client.on_connect = on_connect  # attach function to callback
-    client.on_message = on_message  # attach function to callback
-    client.connect(broker_address, port=port)  # connect to broker
-    client.loop_start()  # start the loop
+#    client = mqttClient.Client("pytest")  # create new instance
+#    client.on_connect = on_connect  # attach function to callback
+#    client.on_message = on_message  # attach function to callback
+#    client.connect(broker_address, port=port)  # connect to broker
+ #   client.loop_start()  # start the loop
 
     #   The main loop, clock setting and click x for quit etc.
     run = True
@@ -352,25 +368,25 @@ def main():
 
         #   MQTT Call backs... putting values in from topics
 
-        client.subscribe("#") #     Subscribes to all topics
-        client.message_callback_add('engine/rpm/state', on_message_rpm)
-        client.message_callback_add('engine/egt/state', on_message_egt)
-        client.message_callback_add('engine/oilpressure/state', on_message_oilpressure)
-        client.message_callback_add('engine/boost/state', on_message_boost)
-        client.message_callback_add('engine/coolant/state', on_message_coolant)
-        client.message_callback_add('engine/fuel/state', on_message_fuel)
-        client.message_callback_add('cabin/outside_temp/state', on_message_outside_temp)
-        client.message_callback_add('cabin/speed_cv/state', on_message_speed_cv)
-        client.message_callback_add('indicator/illumination/state', on_message_illumination)
-        client.message_callback_add('indicator/foglight/state', on_message_foglight)
-        client.message_callback_add('indicator/defog/state', on_message_defog)
-        client.message_callback_add('indicator/highbeam/state', on_message_highbeam)
-        client.message_callback_add('indicator/leftturn/state', on_message_leftturn)
-        client.message_callback_add('indicator/rightturn/state', on_message_rightturn)
-        client.message_callback_add('indicator/brakewarn/state', on_message_brakewarn)
-        client.message_callback_add('indicator/oillight/state', on_message_oillight)
-        client.message_callback_add('indicator/alt/state', on_message_alt)
-        client.message_callback_add('indicator/glow/state', on_message_glow)
+ #       client.subscribe("#") #     Subscribes to all topics
+ #       client.message_callback_add('engine/rpm/state', on_message_rpm)
+ #       client.message_callback_add('engine/egt/state', on_message_egt)
+ #       client.message_callback_add('engine/oilpressure/state', on_message_oilpressure)
+ #       client.message_callback_add('engine/boost/state', on_message_boost)
+ #       client.message_callback_add('engine/coolant/state', on_message_coolant)
+ #       client.message_callback_add('engine/fuel/state', on_message_fuel)
+ #       client.message_callback_add('cabin/outside_temp/state', on_message_outside_temp)
+ #       client.message_callback_add('cabin/speed_cv/state', on_message_speed_cv)
+ #       client.message_callback_add('indicator/illumination/state', on_message_illumination)
+ #       client.message_callback_add('indicator/foglight/state', on_message_foglight)
+ #       client.message_callback_add('indicator/defog/state', on_message_defog)
+ #       client.message_callback_add('indicator/highbeam/state', on_message_highbeam)
+ #       client.message_callback_add('indicator/leftturn/state', on_message_leftturn)
+ #       client.message_callback_add('indicator/rightturn/state', on_message_rightturn)
+ #       client.message_callback_add('indicator/brakewarn/state', on_message_brakewarn)
+ #       client.message_callback_add('indicator/oillight/state', on_message_oillight)
+ #       client.message_callback_add('indicator/alt/state', on_message_alt)
+ #       client.message_callback_add('indicator/glow/state', on_message_glow)
 
         draw_digifiz()
         pygame.display.update()
