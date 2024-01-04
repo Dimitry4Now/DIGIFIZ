@@ -1,3 +1,5 @@
+from main import rpm, coolant, egt, oilpressure, boost
+
 
 ######
 #       MQTT Connection Function

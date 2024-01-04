@@ -11,7 +11,7 @@ testingStatus = False
 #   Screen Size
 WIDTH, HEIGHT = 1920, 720  # use your screens display information
 WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.DOUBLEBUF)
-FPS = 60
+FPS = 120
 
 # Title and Icon
 ICON = "images/speedometer.png"
