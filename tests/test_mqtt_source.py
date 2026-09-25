@@ -1,6 +1,6 @@
 from types import SimpleNamespace
 
-from digifiz.signals import BY_KEY, INDICATOR_TOPICS
+from digifiz.signals import BY_KEY, CONTROL_TOPICS, INDICATOR_TOPICS
 from digifiz.sources.mqtt_source import MqttSource, parse_payload
 
 
@@ -69,4 +69,15 @@ def test_subscribes_once_to_explicit_topics():
     subscribed = [topic for topic, _qos in calls[0]]
     assert "#" not in subscribed
     assert BY_KEY["rpm"].topic in subscribed
-    assert len(subscribed) == len(BY_KEY) + len(INDICATOR_TOPICS)
+    assert len(subscribed) == len(BY_KEY) + len(INDICATOR_TOPICS) + len(
+        CONTROL_TOPICS
+    )
+
+
+def test_mfa_control_topics_reach_drain():
+    source = MqttSource()
+    source._on_message(None, None, message(CONTROL_TOPICS["mfa_next"], b"1"))
+    assert source.drain() == {"mfa_next": 1.0}
+
+    source._on_message(None, None, message(CONTROL_TOPICS["mfa_mode"], b"3"))
+    assert source.drain() == {"mfa_mode": 3.0}

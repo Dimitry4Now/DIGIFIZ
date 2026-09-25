@@ -48,13 +48,26 @@ the MFA stepping through its modes and the odometer running:
 tools/demo_suite.sh 800x480 15
 ```
 
-### Keys
+### Switching MFA modes
 
-| Key | What it does |
+Every input steps through the same list in the same order, because they all end
+up calling the same code:
+
+| Input | How |
 |---|---|
-| `m` or `→` | Next MFA mode |
-| `←` | Previous MFA mode |
-| `Esc` or `q` | Quit |
+| Keyboard | `m` or `→` for next, `←` for previous |
+| GPIO button | `--mfa-button-pin 17`, button between that pin and ground |
+| Arduino button | send `mfabtn=1` / `mfabtn=0` in the serial line |
+| MQTT | publish to `cabin/mfa_next/state` |
+| Rotary switch | publish a position to `cabin/mfa_mode/state`, or send `mfa=3` over serial |
+| Timer | `--mfa-cycle SECONDS` |
+
+A button input is read as a press on any change to a non-zero value, so both a
+0/1 edge and a press counter work, and holding the button down does not race
+through the modes. `Esc` or `q` quits.
+
+The GPIO button needs `pip install gpiozero lgpio` on the Pi. Without it the
+dash logs a warning and carries on.
 
 ### Useful flags
 
@@ -96,6 +109,8 @@ engine/fuel/state         litres     0..60
 engine/consumption/state  L/100km    0..30
 engine/oil_temp/state     °C        40..150
 cabin/speed_cv/state      km/h       0..199
+cabin/mfa_next/state      button, any change to non-zero steps one mode
+cabin/mfa_mode/state      mode index or name, e.g. 3 or "trip"
 cabin/avg_speed/state     km/h       0..199
 cabin/outside_temp/state  °C       -40..60
 indicator/<name>/state    0 or 1
@@ -126,7 +141,8 @@ One line per update, keys optional, so a sketch can send only what it has:
 D rpm=1850 egt=430 boost=12.4 oilp=45 clt=88 fuel=32 spd=62 ind=0x1A4
 ```
 
-Recognised keys: `rpm`, `egt`, `boost`, `oilp`, `clt`, `fuel`, `spd`, `oat`.
+Recognised keys: `rpm`, `egt`, `boost`, `oilp`, `clt`, `fuel`, `spd`, `oat`,
+`cons`, `oilt`, `avg`, plus `mfabtn` (mode button) and `mfa` (absolute mode).
 
 `ind` is a bitfield over the ten indicator lamps, bit 0 first.
 
@@ -204,7 +220,8 @@ digifiz/            the dash itself
   app.py            display setup, render loop, frame pacing
   config.py         tunables and environment variables
   layout.py         every coordinate, in logical space
-  mfa.py            the MFA's modes and their label chips
+  mfa.py            the MFA's modes, their chips and the cycle order
+  button.py         a physical MFA button on a GPIO pin
   assets.py         load, convert and pre-scale artwork once
   render.py         drawing and the repaint gate
   scaling.py        engineering units to artwork frames

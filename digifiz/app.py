@@ -11,7 +11,8 @@ import pygame
 
 from . import config
 from . import __version__
-from .assets import AssetCache, load_intro_frames
+from .assets import AssetCache, intro_frame_paths, load_intro_frame
+from .button import MfaButton
 from .layout import Geometry
 from .odometer import Odometer
 from .render import Renderer
@@ -54,7 +55,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--fps", type=int, default=config.FPS, help="frame cap (default: %(default)s)"
     )
     parser.add_argument(
-        "--intro", action="store_true", help="play the intro frames before the dash"
+        "--intro",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="play the intro before the dash (on by default with the demo "
+        "source whenever extracted frames exist)",
     )
     parser.add_argument(
         "--selftest",
@@ -72,6 +77,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         metavar="SECONDS",
         help="step the MFA through its modes automatically; 0 disables "
         "(defaults to 4 seconds with the demo source, off otherwise)",
+    )
+    parser.add_argument(
+        "--mfa-button-pin",
+        type=int,
+        metavar="BCM",
+        default=int(config.MFA_BUTTON_PIN) if config.MFA_BUTTON_PIN else None,
+        help="GPIO pin (BCM numbering) of a physical MFA mode button",
     )
     parser.add_argument(
         "--odometer", type=int, metavar="KM", help="start the odometer here"
@@ -139,20 +151,26 @@ def init_display(args: argparse.Namespace) -> pygame.Surface:
 
 
 def play_intro(surface: pygame.Surface, geometry: Geometry) -> None:
-    """Blit pre-extracted frames. No video decoding happens at runtime."""
-    frames = load_intro_frames(geometry)
-    if not frames:
-        log.info("no intro frames in %s, skipping", config.INTRO_DIR)
+    """Stream pre-extracted frames. No video is decoded at runtime."""
+    paths = intro_frame_paths()
+    if not paths:
+        log.warning(
+            "no intro frames in %s - build them with "
+            "tools/extract_intro.sh das_auto.mp4 %dx%d",
+            config.INTRO_DIR,
+            *geometry.size,
+        )
         return
+    log.info("intro: %d frames at %g fps", len(paths), config.INTRO_FPS)
     clock = pygame.time.Clock()
-    for frame in frames:
+    for path in paths:
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (
                 event.type == pygame.KEYDOWN
-                and event.key in (pygame.K_ESCAPE, pygame.K_SPACE)
+                and event.key in (pygame.K_ESCAPE, pygame.K_SPACE, pygame.K_q)
             ):
                 return
-        surface.blit(frame, (0, 0))
+        surface.blit(load_intro_frame(path, geometry), (0, 0))
         pygame.display.flip()
         clock.tick(config.INTRO_FPS)
 
@@ -207,7 +225,15 @@ def run(args: argparse.Namespace) -> int:
         geometry.offset,
     )
 
-    if args.intro or config.INTRO_ENABLED:
+    play_it = args.intro
+    if play_it is None:
+        # A demo is meant to show the whole thing, so the intro plays whenever
+        # it has been built. Anywhere else it is opt-in, because a cluster
+        # coming up in a car should show numbers as soon as it can.
+        play_it = config.INTRO_ENABLED or (
+            args.source == "demo" and bool(intro_frame_paths())
+        )
+    if play_it:
         play_intro(surface, geometry)
 
     assets = AssetCache(geometry)
@@ -227,6 +253,11 @@ def run(args: argparse.Namespace) -> int:
     source = build_source(args.source, scenario=args.scenario)
     source.start()
     state.source_name = source.name
+
+    button = None
+    if args.mfa_button_pin is not None:
+        button = MfaButton(args.mfa_button_pin)
+        button.start()
 
     mfa_cycle = args.mfa_cycle
     if mfa_cycle is None:
@@ -270,6 +301,11 @@ def run(args: argparse.Namespace) -> int:
                         mfa_timer = 0.0
 
             state.apply(source.drain())
+
+            if button is not None:
+                for _ in range(button.drain()):
+                    state.cycle_mfa()
+                    mfa_timer = 0.0
 
             if mfa_cycle:
                 mfa_timer += dt
@@ -318,6 +354,8 @@ def run(args: argparse.Namespace) -> int:
             state.dirty = False
             drawn += 1
     finally:
+        if button is not None:
+            button.stop()
         source.stop()
         if save_odometer:
             odometer.maybe_write(force=True)

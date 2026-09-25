@@ -23,6 +23,8 @@ Environment=SDL_VIDEODRIVER=kmsdrm
 Environment=PYTHONUNBUFFERED=1
 Environment=DIGIFIZ_SOURCE=mqtt
 Environment=DIGIFIZ_MQTT_HOST=localhost
+# BCM pin of a physical MFA mode button, if one is fitted.
+#Environment=DIGIFIZ_MFA_BUTTON_PIN=17
 
 ExecStart=/home/pi/DIGIFIZ/.venv/bin/python -m digifiz.app
 

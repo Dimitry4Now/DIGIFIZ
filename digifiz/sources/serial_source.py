@@ -33,6 +33,12 @@ FIELD_MAP = {
     "fuel": "fuel",
     "spd": "speed",
     "oat": "outside_temp",
+    "cons": "consumption",
+    "oilt": "oil_temp",
+    "avg": "avg_speed",
+    # MFA controls: an absolute mode, and a button that steps one mode along.
+    "mfa": "mfa_mode",
+    "mfabtn": "mfa_next",
 }
 
 

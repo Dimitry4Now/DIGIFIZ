@@ -62,6 +62,9 @@ SERIAL_BAUD = int(_env("DIGIFIZ_SERIAL_BAUD", "115200"))
 
 OBD_PORT = _env("DIGIFIZ_OBD_PORT", "")
 
+#: BCM pin number for a physical MFA mode button, or empty for none.
+MFA_BUTTON_PIN = _env("DIGIFIZ_MFA_BUTTON_PIN", "")
+
 #: A value older than this is drawn as stale rather than as current truth.
 STALE_AFTER = float(_env("DIGIFIZ_STALE_AFTER", "5.0"))
 

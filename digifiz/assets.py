@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import logging
 import time
+from pathlib import Path
 
 import pygame
 
@@ -107,19 +108,22 @@ def _replace_color(
     pixels.close()
 
 
-def load_intro_frames(geometry: Geometry) -> list[pygame.Surface]:
-    """Pre-extracted intro frames, empty list if none are present.
-
-    Frames are produced once by tools/extract_intro.sh rather than decoded at
-    runtime, which is what let the opencv-python dependency go away.
-    """
+def intro_frame_paths() -> list[Path]:
+    """Pre-extracted intro frames, in order. Empty if the intro is not built."""
     if not config.INTRO_DIR.is_dir():
         return []
-    frames = []
-    for path in sorted(config.INTRO_DIR.glob("frame_*.png")):
-        surface = pygame.image.load(str(path)).convert()
-        target = geometry.size
-        if surface.get_size() != target:
-            surface = pygame.transform.smoothscale(surface, target)
-        frames.append(surface)
-    return frames
+    return sorted(config.INTRO_DIR.glob("frame_*.png"))
+
+
+def load_intro_frame(path: Path, geometry: Geometry) -> pygame.Surface:
+    """One intro frame, decoded on demand.
+
+    Frames are streamed from disk rather than all held in memory: a few seconds
+    of full-screen video is hundreds of MB as surfaces, and decoding one PNG
+    costs a few milliseconds, which fits inside the frame budget. Extract them
+    at the panel's own size (tools/extract_intro.sh) so nothing is scaled here.
+    """
+    surface = pygame.image.load(str(path)).convert()
+    if surface.get_size() != geometry.size:
+        surface = pygame.transform.smoothscale(surface, geometry.size)
+    return surface

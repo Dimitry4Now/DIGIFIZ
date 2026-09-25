@@ -50,3 +50,23 @@ DEFAULT_INDEX = 0
 
 def next_index(index: int, step: int = 1) -> int:
     return (index + step) % len(MODES)
+
+
+def resolve(value: object) -> int | None:
+    """Turn a published mode into an index, or None if it means nothing.
+
+    Accepts an index (``3``) or a mode name (``"trip"``), so a button that
+    counts presses and a switch that reports a position both work.
+    """
+    if isinstance(value, str):
+        name = value.strip().lower()
+        if name in BY_KEY:
+            return MODES.index(BY_KEY[name])
+        try:
+            value = float(name)
+        except ValueError:
+            return None
+    try:
+        return int(value) % len(MODES)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return None

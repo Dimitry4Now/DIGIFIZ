@@ -70,13 +70,26 @@ INDICATOR_TOPICS: dict[str, str] = {
 }
 TOPIC_TO_INDICATOR: dict[str, str] = {v: k for k, v in INDICATOR_TOPICS.items()}
 
+#: Inputs that switch the MFA rather than being displayed. ``mfa_mode`` carries
+#: a mode index or name; ``mfa_next`` is a button - either 0/1 edges or a press
+#: counter - and each press steps one mode along mfa.MODES.
+CONTROL_TOPICS: dict[str, str] = {
+    "mfa_mode": "cabin/mfa_mode/state",
+    "mfa_next": "cabin/mfa_next/state",
+}
+TOPIC_TO_CONTROL: dict[str, str] = {v: k for k, v in CONTROL_TOPICS.items()}
+
 #: Factory reserve light comes on at 7 litres, it is derived not published.
 FUEL_RESERVE_LITRES = 7.0
 
 
 def all_topics(prefix: str = "") -> list[str]:
     """Every topic the dash subscribes to, in publish order."""
-    topics = [s.topic for s in SIGNALS] + list(INDICATOR_TOPICS.values())
+    topics = (
+        [s.topic for s in SIGNALS]
+        + list(INDICATOR_TOPICS.values())
+        + list(CONTROL_TOPICS.values())
+    )
     if prefix:
         return [f"{prefix.rstrip('/')}/{t}" for t in topics]
     return topics

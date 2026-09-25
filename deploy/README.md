@@ -55,6 +55,24 @@ offset.
 a console with no X11, no Wayland and no compositor. Boot to console with
 `sudo raspi-config` → System Options → Boot / Auto Login → Console.
 
+## A physical MFA button
+
+Wire a momentary button between a GPIO pin and ground; the internal pull-up
+means no resistor is needed. Then:
+
+```bash
+.venv/bin/pip install gpiozero lgpio
+.venv/bin/python -m digifiz.app --mfa-button-pin 17
+```
+
+Or set `DIGIFIZ_MFA_BUTTON_PIN=17` in the service file. Pin numbers are BCM.
+Each press steps one mode along; the button is debounced in software, so a
+plain switch is fine.
+
+If the button is wired to the Arduino instead, send `mfabtn=1` and `mfabtn=0`
+in the serial line, or publish to `cabin/mfa_next/state` over MQTT. All three
+follow the same mode order.
+
 ## Service
 
 ```bash

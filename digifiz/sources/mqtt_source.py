@@ -13,7 +13,13 @@ import logging
 import paho.mqtt.client as mqtt
 
 from .. import config
-from ..signals import BY_TOPIC, TOPIC_TO_INDICATOR, all_topics, strip_prefix
+from ..signals import (
+    BY_TOPIC,
+    TOPIC_TO_CONTROL,
+    TOPIC_TO_INDICATOR,
+    all_topics,
+    strip_prefix,
+)
 from .base import DataSource
 
 log = logging.getLogger(__name__)
@@ -106,6 +112,8 @@ class MqttSource(DataSource):
             self.publish(BY_TOPIC[topic].key, value)
         elif topic in TOPIC_TO_INDICATOR:
             self.publish(TOPIC_TO_INDICATOR[topic], value >= 0.5)
+        elif topic in TOPIC_TO_CONTROL:
+            self.publish(TOPIC_TO_CONTROL[topic], value)
         else:
             self._warn_once(topic, "topic is not on the dash")
 

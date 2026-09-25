@@ -128,3 +128,59 @@ def test_cycle_order_starts_at_the_clock_and_loops():
 
     state.cycle_mfa()
     assert state.mfa_mode.key == "clock"
+
+
+def test_every_input_walks_the_same_order():
+    """The keyboard, a GPIO button, MQTT and serial all call cycle_mfa(), so
+    checking the order once covers all of them."""
+    expected = [mode.key for mode in mfa.MODES]
+
+    from_button = DashState()
+    from_button.apply({"mfa_next": 0})  # the button sits released at startup
+    seen = [from_button.mfa_mode.key]
+    for _ in range(len(mfa.MODES) - 1):
+        # A button toggling 0/1, the way a GPIO or Arduino input arrives.
+        from_button.apply({"mfa_next": 1})  # pressed
+        from_button.apply({"mfa_next": 0})  # released
+        seen.append(from_button.mfa_mode.key)
+
+    from_keyboard = DashState()
+    typed = [from_keyboard.mfa_mode.key]
+    for _ in range(len(mfa.MODES) - 1):
+        from_keyboard.cycle_mfa()
+        typed.append(from_keyboard.mfa_mode.key)
+
+    assert typed == expected
+    assert seen == expected
+
+
+def test_button_counter_also_steps_one_mode_per_press():
+    """An Arduino that sends a press count rather than 0/1 edges."""
+    state = DashState()
+    state.apply({"mfa_next": 0})
+    for count in range(1, 4):
+        state.apply({"mfa_next": count})
+    assert state.mfa_mode.key == mfa.MODES[3].key
+
+
+def test_holding_the_button_does_not_race_ahead():
+    state = DashState()
+    state.apply({"mfa_next": 0})
+    state.apply({"mfa_next": 1})
+    first = state.mfa_index
+    for _ in range(20):  # the input stays high while the button is held
+        state.apply({"mfa_next": 1})
+    assert state.mfa_index == first
+
+
+def test_absolute_mode_selection():
+    """A rotary switch reporting a position rather than a button."""
+    state = DashState()
+    state.apply({"mfa_mode": "oil_temp"})
+    assert state.mfa_mode.key == "oil_temp"
+    state.apply({"mfa_mode": 1})
+    assert state.mfa_mode.key == mfa.MODES[1].key
+    state.apply({"mfa_mode": 99})  # wraps rather than crashing
+    assert state.mfa_mode.key == mfa.MODES[99 % len(mfa.MODES)].key
+    state.apply({"mfa_mode": "nonsense"})  # ignored, mode unchanged
+    assert state.mfa_mode.key == mfa.MODES[99 % len(mfa.MODES)].key
