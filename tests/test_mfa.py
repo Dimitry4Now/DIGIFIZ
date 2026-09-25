@@ -106,3 +106,25 @@ def test_signature_changes_with_the_mode(renderer):
     before = renderer.signature(state)
     state.cycle_mfa()
     assert renderer.signature(state) != before
+
+
+def test_cycle_order_starts_at_the_clock_and_loops():
+    assert [mode.key for mode in mfa.MODES] == [
+        "clock",
+        "trip",
+        "consumption",
+        "avg_speed",
+        "oil_temp",
+        "outside_temp",
+    ]
+    assert mfa.MODES[mfa.DEFAULT_INDEX].key == "clock"
+
+    state = DashState()
+    order = [state.mfa_mode.key]
+    for _ in range(len(mfa.MODES) - 1):
+        state.cycle_mfa()
+        order.append(state.mfa_mode.key)
+    assert order == [mode.key for mode in mfa.MODES]
+
+    state.cycle_mfa()
+    assert state.mfa_mode.key == "clock"

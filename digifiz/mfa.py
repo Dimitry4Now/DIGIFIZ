@@ -30,19 +30,22 @@ class Mode:
     decimals: int = 0
 
 
+#: Cycle order, which is the order the modes step through and not the order
+#: their chips sit in the artwork. The dash starts on the clock and works its
+#: way round back to it.
 MODES: tuple[Mode, ...] = (
+    Mode("clock", "clock", (1, 104, 59, 42), "clock"),
+    Mode("trip", "KM", (1, 55, 59, 42), "trip", decimals=1),
     Mode("consumption", "L/100KM", (1, 1, 149, 47), "consumption", decimals=1),
     Mode("avg_speed", "KM/H", (157, 1, 92, 47), "avg_speed"),
     Mode("oil_temp", "oil C", (256, 1, 110, 47), "oil_temp"),
     Mode("outside_temp", "ambient C", (373, 1, 81, 47), "outside_temp"),
-    Mode("trip", "KM", (1, 55, 59, 42), "trip", decimals=1),
-    Mode("clock", "clock", (1, 104, 59, 42), "clock"),
 )
 
 BY_KEY = {mode.key: mode for mode in MODES}
 
-#: The mode the dash starts in, matching the artwork's own lit chip.
-DEFAULT_INDEX = MODES.index(BY_KEY["outside_temp"])
+#: The dash comes up showing the time.
+DEFAULT_INDEX = 0
 
 
 def next_index(index: int, step: int = 1) -> int:

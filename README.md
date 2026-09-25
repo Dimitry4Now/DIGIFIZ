@@ -17,9 +17,9 @@ resolution-independent rendering and a test suite.
 ## What it does
 
 - Tachometer, speedometer, clock, odometer and trip counter.
-- MFA panel with all six readings and the original mode chips: consumption in
-  L/100KM, average speed, oil temperature, ambient temperature, trip distance
-  and the clock. One chip lights at a time, as on the real cluster.
+- MFA panel with all six readings and the original mode chips, cycling clock →
+  trip KM → L/100KM → KM/H → oil °C → ambient °C and back round. One chip
+  lights at a time, as on the real cluster.
 - Four aux gauges: coolant temperature, exhaust gas temperature, oil pressure
   and boost.
 - Ten indicator lamps plus the fuel reserve warning.
