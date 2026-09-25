@@ -73,5 +73,7 @@ ODO_WRITE_INTERVAL = float(_env("DIGIFIZ_ODO_WRITE_INTERVAL", "30.0"))
 
 INTRO_ENABLED = _env_bool("DIGIFIZ_INTRO", False)
 INTRO_FPS = float(_env("DIGIFIZ_INTRO_FPS", "25"))
+#: Seconds to dissolve from the last intro frame into the dash.
+INTRO_FADE = float(_env("DIGIFIZ_INTRO_FADE", "0.5"))
 
 DEMO_SCENARIO = _env("DIGIFIZ_SCENARIO", "drive")

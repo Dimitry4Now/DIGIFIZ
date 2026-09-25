@@ -6,6 +6,7 @@ import argparse
 import logging
 import os
 import time
+from collections.abc import Iterator
 
 import pygame
 
@@ -150,8 +151,17 @@ def init_display(args: argparse.Namespace) -> pygame.Surface:
     return surface
 
 
-def play_intro(surface: pygame.Surface, geometry: Geometry) -> None:
-    """Stream pre-extracted frames. No video is decoded at runtime."""
+def play_intro(
+    surface: pygame.Surface,
+    geometry: Geometry,
+    loader: Iterator[float] | None = None,
+) -> pygame.Surface | None:
+    """Stream pre-extracted frames, returning the last one shown.
+
+    No video is decoded at runtime. If a ``loader`` is given, the dash's
+    artwork is loaded a surface at a time in whatever is left of each frame's
+    budget, so the intro is not followed by a pause with nothing on screen.
+    """
     paths = intro_frame_paths()
     if not paths:
         log.warning(
@@ -160,19 +170,56 @@ def play_intro(surface: pygame.Surface, geometry: Geometry) -> None:
             config.INTRO_DIR,
             *geometry.size,
         )
-        return
+        return None
+
     log.info("intro: %d frames at %g fps", len(paths), config.INTRO_FPS)
+    budget = 1.0 / config.INTRO_FPS
     clock = pygame.time.Clock()
+    last = None
     for path in paths:
+        started = time.monotonic()
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (
                 event.type == pygame.KEYDOWN
                 and event.key in (pygame.K_ESCAPE, pygame.K_SPACE, pygame.K_q)
             ):
-                return
-        surface.blit(load_intro_frame(path, geometry), (0, 0))
+                return last
+        last = load_intro_frame(path, geometry)
+        surface.blit(last, (0, 0))
         pygame.display.flip()
+
+        # Whatever is left of this frame goes into loading the dash. A margin
+        # keeps the playback smooth even when a step runs long.
+        if loader is not None:
+            deadline = started + budget * 0.8
+            while time.monotonic() < deadline:
+                try:
+                    next(loader)
+                except StopIteration:
+                    loader = None
+                    break
         clock.tick(config.INTRO_FPS)
+    return last
+
+
+def crossfade(
+    surface: pygame.Surface,
+    before: pygame.Surface,
+    after: pygame.Surface,
+    seconds: float = 0.5,
+) -> None:
+    """Dissolve from one full-screen image into another."""
+    if seconds <= 0:
+        return
+    faded = after.convert_alpha()
+    clock = pygame.time.Clock()
+    elapsed = 0.0
+    while elapsed < seconds:
+        elapsed += clock.tick(config.FPS) / 1000.0
+        faded.set_alpha(int(min(1.0, elapsed / seconds) * 255))
+        surface.blit(before, (0, 0))
+        surface.blit(faded, (0, 0))
+        pygame.display.flip()
 
 
 def play_selftest(
@@ -225,6 +272,11 @@ def run(args: argparse.Namespace) -> int:
         geometry.offset,
     )
 
+    # Loading starts before the intro so its frames fill the intro's own idle
+    # time rather than becoming a pause afterwards.
+    assets = AssetCache(geometry, load=False)
+    loader = assets.load_progressively()
+
     play_it = args.intro
     if play_it is None:
         # A demo is meant to show the whole thing, so the intro plays whenever
@@ -233,10 +285,11 @@ def run(args: argparse.Namespace) -> int:
         play_it = config.INTRO_ENABLED or (
             args.source == "demo" and bool(intro_frame_paths())
         )
-    if play_it:
-        play_intro(surface, geometry)
+    last_intro_frame = play_intro(surface, geometry, loader) if play_it else None
 
-    assets = AssetCache(geometry)
+    # Finish anything the intro did not get through.
+    for _ in loader:
+        pass
     renderer = Renderer(geometry, assets)
     state = DashState()
     odometer = Odometer()
@@ -246,6 +299,12 @@ def run(args: argparse.Namespace) -> int:
         odometer.trip = args.trip
     state.odometer = odometer.odometer
     state.trip = float(odometer.trip)
+
+    if last_intro_frame is not None:
+        # Dissolve into the first dash frame instead of cutting to it.
+        first = surface.copy()
+        renderer.draw(first, state)
+        crossfade(surface, last_intro_frame, first, config.INTRO_FADE)
 
     if args.selftest:
         play_selftest(surface, renderer, state, args.selftest)

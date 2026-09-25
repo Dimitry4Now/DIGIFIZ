@@ -168,13 +168,23 @@ An optional splash plays before the dash comes up. The clip is converted to
 pre-scaled PNG frames once, so nothing is decoded at runtime:
 
 ```bash
-sudo apt install ffmpeg
 tools/extract_intro.sh das_auto.mp4 800x480
 .venv/bin/python -m digifiz.app --intro --size 800x480
 ```
 
-Frames land in `images/intro/` and are not tracked, so re-run the extraction for
-each panel size. Without them, `--intro` simply skips.
+Extraction uses ffmpeg, or GStreamer if ffmpeg is not installed. Frames land in
+`images/intro/` and are not tracked, so re-run it for each panel size. Without
+them, `--intro` simply skips.
+
+The handover into the dash is built to be seamless:
+
+- Black frames at the start and end of the clip are trimmed on extraction, so
+  the intro is animation rather than a dead screen. The supplied clip loses 2.2
+  seconds of black this way.
+- The dash's artwork loads **during** playback, a surface at a time in whatever
+  is left of each frame's budget, so there is no pause once the intro ends.
+- The last intro frame dissolves into the first dash frame over half a second
+  (`DIGIFIZ_INTRO_FADE`, 0 to cut straight).
 
 ## Performance
 
@@ -228,7 +238,7 @@ digifiz/            the dash itself
   signals.py        the one description of every value and topic
   simulation.py     synthetic engine behaviour
   sources/          mqtt, demo, serial, obd
-tools/              simulator, dev runner, intro frame extraction
+tools/              simulator, dev runner, intro extraction and trimming
 deploy/             systemd unit and Raspberry Pi notes
 images/, fonts/     artwork
 arduino-node-red/   sketches and notes for the sensor hardware

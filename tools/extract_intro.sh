@@ -37,3 +37,9 @@ fi
 COUNT=$(ls "$OUT"/frame_*.png 2>/dev/null | wc -l)
 [ "$COUNT" -gt 0 ] || { echo "extraction produced no frames" >&2; exit 1; }
 echo "wrote $COUNT frames to $OUT at ${WIDTH}x${HEIGHT}"
+
+# Clips usually open and close on black, which reads as a dead screen rather
+# than as part of the animation.
+PYTHON=".venv/bin/python"
+[ -x "$PYTHON" ] || PYTHON="python3"
+"$PYTHON" tools/trim_black_frames.py "$OUT" || true

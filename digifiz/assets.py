@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import logging
 import time
+from collections.abc import Iterator
 from pathlib import Path
 
 import pygame
@@ -21,32 +22,85 @@ from .signals import AUX_FRAMES, INDICATORS, RPM_FRAMES
 log = logging.getLogger(__name__)
 
 
+#: How many surfaces a full load produces, used for progress reporting.
+TOTAL_SURFACES = RPM_FRAMES + AUX_FRAMES + len(INDICATORS) + len(mfa.MODES) + 3
+
+
 class AssetCache:
-    def __init__(self, geometry: Geometry) -> None:
+    """Every surface the dash draws, loaded once.
+
+    Loading can be driven a step at a time (:meth:`load_progressively`) so it
+    can happen during the intro instead of as a pause after it.
+    """
+
+    def __init__(self, geometry: Geometry, load: bool = True) -> None:
         self.geometry = geometry
-        started = time.monotonic()
+        self.background: pygame.Surface | None = None
+        self.rpm_frames: list[pygame.Surface] = []
+        self.aux_frames: list[pygame.Surface] = []
+        self.indicators: list[pygame.Surface] = []
+        self.mfa_modes: dict[str, pygame.Surface] = {}
+        self.fuel_reserve_on: pygame.Surface | None = None
+        self.fuel_reserve_off: pygame.Surface | None = None
+        self.ready = False
+        self.load_seconds = 0.0
+        self._started = 0.0
+        if load:
+            self.load()
+
+    def load(self) -> None:
+        """Load everything now."""
+        for _ in self.load_progressively():
+            pass
+
+    def load_progressively(self) -> Iterator[float]:
+        """Load one surface per step, yielding progress from 0.0 to 1.0.
+
+        The caller decides how much time to spend per step, which is what lets
+        the intro play at full frame rate while the dash loads behind it.
+        """
+        if self.ready:
+            return
+        self._started = time.monotonic()
+        done = 0
 
         self.background = self._load("background.png")
+        done += 1
+        yield done / TOTAL_SURFACES
+
         # Each frame already carries the bar's track and scale, so there is no
         # separate label to blit over it.
-        self.rpm_frames = [
-            self._load(f"rpm/RPM {index * 100:03d}.png") for index in range(RPM_FRAMES)
-        ]
-        self.aux_frames = [
-            self._load(f"gauges/aux{index}.png") for index in range(AUX_FRAMES)
-        ]
-        self.indicators = [
-            self._load(f"indicators/ind{index}.png") for index in range(len(INDICATORS))
-        ]
+        for index in range(RPM_FRAMES):
+            self.rpm_frames.append(self._load(f"rpm/RPM {index * 100:03d}.png"))
+            done += 1
+            yield done / TOTAL_SURFACES
+
+        for index in range(AUX_FRAMES):
+            self.aux_frames.append(self._load(f"gauges/aux{index}.png"))
+            done += 1
+            yield done / TOTAL_SURFACES
+
+        for index in range(len(INDICATORS)):
+            self.indicators.append(self._load(f"indicators/ind{index}.png"))
+            done += 1
+            yield done / TOTAL_SURFACES
+
         self.fuel_reserve_on = self._load("indicators/fuelResOn.png")
         self.fuel_reserve_off = self._load("indicators/fuelResOff.png")
-        self.mfa_modes = self._build_mfa_modes()
+        done += 2
+        yield done / TOTAL_SURFACES
 
-        self.load_seconds = time.monotonic() - started
+        for key, surface in self._mfa_mode_surfaces():
+            self.mfa_modes[key] = surface
+            done += 1
+            yield done / TOTAL_SURFACES
+
+        self.ready = True
+        self.load_seconds = time.monotonic() - self._started
         log.info(
             "loaded %d surfaces at scale %.3f in %.2fs",
             self.count,
-            geometry.scale,
+            self.geometry.scale,
             self.load_seconds,
         )
 
@@ -57,10 +111,10 @@ class AssetCache:
             + len(self.aux_frames)
             + len(self.indicators)
             + len(self.mfa_modes)
-            + 4
+            + 3
         )
 
-    def _build_mfa_modes(self) -> dict[str, pygame.Surface]:
+    def _mfa_mode_surfaces(self) -> Iterator[tuple[str, pygame.Surface]]:
         """One MFA surface per mode, with only that mode's chip lit.
 
         The artwork ships with the ambient temperature chip lit. Every chip is
@@ -73,14 +127,12 @@ class AssetCache:
         ).convert_alpha()
         _replace_color(base, mfa.CHIP_LIT, mfa.CHIP_UNLIT)
 
-        surfaces: dict[str, pygame.Surface] = {}
         for mode in mfa.MODES:
             surface = base.copy()
             _replace_color(
                 surface, mfa.CHIP_UNLIT, mfa.CHIP_LIT, area=pygame.Rect(mode.chip)
             )
-            surfaces[mode.key] = self._scaled(surface)
-        return surfaces
+            yield mode.key, self._scaled(surface)
 
     def _scaled(self, surface: pygame.Surface) -> pygame.Surface:
         scale = self.geometry.scale
