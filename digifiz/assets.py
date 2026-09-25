@@ -13,7 +13,7 @@ import time
 
 import pygame
 
-from . import config
+from . import config, mfa
 from .layout import Geometry
 from .signals import AUX_FRAMES, INDICATORS, RPM_FRAMES
 
@@ -26,10 +26,11 @@ class AssetCache:
         started = time.monotonic()
 
         self.background = self._load("background.png")
+        # Each frame already carries the bar's track and scale, so there is no
+        # separate label to blit over it.
         self.rpm_frames = [
             self._load(f"rpm/RPM {index * 100:03d}.png") for index in range(RPM_FRAMES)
         ]
-        self.rpm_label = self._load("rpm/RPM.png")
         self.aux_frames = [
             self._load(f"gauges/aux{index}.png") for index in range(AUX_FRAMES)
         ]
@@ -38,7 +39,7 @@ class AssetCache:
         ]
         self.fuel_reserve_on = self._load("indicators/fuelResOn.png")
         self.fuel_reserve_off = self._load("indicators/fuelResOff.png")
-        self.mfa = self._load("indicators/MFA_temp.png")
+        self.mfa_modes = self._build_mfa_modes()
 
         self.load_seconds = time.monotonic() - started
         log.info(
@@ -50,17 +51,60 @@ class AssetCache:
 
     @property
     def count(self) -> int:
-        return len(self.rpm_frames) + len(self.aux_frames) + len(self.indicators) + 5
+        return (
+            len(self.rpm_frames)
+            + len(self.aux_frames)
+            + len(self.indicators)
+            + len(self.mfa_modes)
+            + 4
+        )
+
+    def _build_mfa_modes(self) -> dict[str, pygame.Surface]:
+        """One MFA surface per mode, with only that mode's chip lit.
+
+        The artwork ships with the ambient temperature chip lit. Every chip is
+        a flat colour, so the lit and unlit colours can simply be swapped: the
+        whole panel is dimmed once, then the active chip is lit back up.
+        """
+        # Recolour at native resolution, then scale, so the swap is exact.
+        base = pygame.image.load(
+            str(config.IMAGE_DIR / "indicators/MFA_temp.png")
+        ).convert_alpha()
+        _replace_color(base, mfa.CHIP_LIT, mfa.CHIP_UNLIT)
+
+        surfaces: dict[str, pygame.Surface] = {}
+        for mode in mfa.MODES:
+            surface = base.copy()
+            _replace_color(
+                surface, mfa.CHIP_UNLIT, mfa.CHIP_LIT, area=pygame.Rect(mode.chip)
+            )
+            surfaces[mode.key] = self._scaled(surface)
+        return surfaces
+
+    def _scaled(self, surface: pygame.Surface) -> pygame.Surface:
+        scale = self.geometry.scale
+        if abs(scale - 1.0) <= 1e-6:
+            return surface
+        width = max(1, int(round(surface.get_width() * scale)))
+        height = max(1, int(round(surface.get_height() * scale)))
+        return pygame.transform.smoothscale(surface, (width, height))
 
     def _load(self, relative: str) -> pygame.Surface:
         path = config.IMAGE_DIR / relative
-        surface = pygame.image.load(str(path)).convert_alpha()
-        scale = self.geometry.scale
-        if abs(scale - 1.0) > 1e-6:
-            width = max(1, int(round(surface.get_width() * scale)))
-            height = max(1, int(round(surface.get_height() * scale)))
-            surface = pygame.transform.smoothscale(surface, (width, height))
-        return surface
+        return self._scaled(pygame.image.load(str(path)).convert_alpha())
+
+
+def _replace_color(
+    surface: pygame.Surface,
+    old: tuple[int, int, int],
+    new: tuple[int, int, int],
+    area: pygame.Rect | None = None,
+) -> None:
+    """Swap one flat colour for another, optionally only inside ``area``."""
+    target = surface.subsurface(area) if area else surface
+    pixels = pygame.PixelArray(target)
+    pixels.replace(old, new)
+    pixels.close()
 
 
 def load_intro_frames(geometry: Geometry) -> list[pygame.Surface]:

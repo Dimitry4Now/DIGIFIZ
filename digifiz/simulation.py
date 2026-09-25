@@ -79,6 +79,9 @@ class Idle(Scenario):
             fuel=42.0,
             speed=0.0,
             outside_temp=18.0,
+            consumption=0.9,  # litres per hour shown as the idle reading
+            oil_temp=96.0,
+            avg_speed=0.0,
             illumination=True,
         )
 
@@ -108,6 +111,10 @@ class Drive(Scenario):
         self.coolant = 35.0  # starts cool and warms up
         self.speed = 0.0
         self.fuel = 48.0
+        self.oil_temp = 30.0
+        self.consumption = 0.0
+        self.distance = 0.0
+        self.elapsed = 0.0
 
     def advance(self, dt: float) -> None:
         throttle = _interpolate(self.THROTTLE, self.t)
@@ -125,6 +132,17 @@ class Drive(Scenario):
         self.fuel = max(0.0, self.fuel - dt * (0.004 + throttle * 0.02))
 
         oil = 18 + (self.rpm / 5000) * 45
+        self.oil_temp = _lag(self.oil_temp, 105.0, dt, tau=120.0)
+
+        # Litres per 100 km, from fuel flow against road speed. Standing still
+        # the figure is meaningless, so it pins to the top of the scale like
+        # the real MFA does.
+        flow = 0.6 + throttle * 9.0  # litres per hour
+        self.consumption = 30.0 if self.speed < 5 else min(30.0, flow * 100 / self.speed)
+
+        self.distance += self.speed * dt / 3600.0
+        self.elapsed += dt
+        average = self.distance / (self.elapsed / 3600.0) if self.elapsed > 1 else 0.0
 
         turning = 30.0 <= (self.t % 48.0) < 36.0
         self.values.update(
@@ -136,6 +154,9 @@ class Drive(Scenario):
             fuel=self.fuel,
             speed=self.speed,
             outside_temp=14.0,
+            consumption=self.consumption,
+            oil_temp=self.oil_temp,
+            avg_speed=min(199.0, average),
             illumination=True,
             rightturn=turning and _blink(self.t),
             leftturn=False,
@@ -185,6 +206,9 @@ class Warnings(Scenario):
             fuel=4.0,  # below reserve, so the reserve lamp lights too
             speed=0.0,
             outside_temp=2.0,
+            consumption=1.1,
+            oil_temp=90.0,
+            avg_speed=0.0,
         )
 
 
@@ -205,6 +229,9 @@ class ColdStart(Scenario):
             fuel=31.0,
             speed=0.0,
             outside_temp=-3.0,
+            consumption=0.0,
+            oil_temp=6.0 + min(self.t, 60.0) * 0.5,
+            avg_speed=0.0,
             glow=self.t < 4.0,
             oillight=self.t < 2.5,
             alt=not running,

@@ -18,28 +18,33 @@ from . import config
 log = logging.getLogger(__name__)
 
 
-def parse(text: str) -> tuple[int, int]:
-    """Read ``odo:``/``trip:`` lines. Missing or malformed values become 0."""
-    odometer = trip = 0
+def parse(text: str) -> tuple[int, float]:
+    """Read ``odo:``/``trip:`` lines. Missing or malformed values become 0.
+
+    The odometer counts whole kilometres; the trip keeps one decimal, which is
+    what makes it visibly move on a short drive.
+    """
+    odometer = 0
+    trip = 0.0
     for line in text.splitlines():
         line = line.strip()
         if line.startswith("odo:"):
-            odometer = _to_int(line[4:], "odo")
+            odometer = int(_to_float(line[4:], "odo"))
         elif line.startswith("trip:"):
-            trip = _to_int(line[5:], "trip")
+            trip = _to_float(line[5:], "trip")
     return odometer, trip
 
 
-def _to_int(raw: str, label: str) -> int:
+def _to_float(raw: str, label: str) -> float:
     try:
-        return int(float(raw.strip()))
+        return float(raw.strip())
     except ValueError:
         log.warning("odo.txt: %s value %r is not a number, using 0", label, raw)
-        return 0
+        return 0.0
 
 
-def format_file(odometer: int, trip: int) -> str:
-    return f"odo:{odometer}\ntrip:{trip}\n"
+def format_file(odometer: int, trip: float) -> str:
+    return f"odo:{odometer:06d}\ntrip:{trip:.1f}\n"
 
 
 class Odometer:
@@ -58,7 +63,7 @@ class Odometer:
 
     def maybe_write(self, force: bool = False) -> bool:
         """Persist if the value changed and the debounce window has passed."""
-        current = (self.odometer, self.trip)
+        current = (self.odometer, round(self.trip, 1))
         if current == self._written:
             return False
         now = time.monotonic()

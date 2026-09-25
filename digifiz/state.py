@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import time
 
-from . import config
+from . import config, mfa
 from .signals import INDICATORS, BY_KEY, FUEL_RESERVE_LITRES
 
 
@@ -21,7 +21,8 @@ class DashState:
         self.updated: dict[str, float] = {}
         self.indicators: dict[str, bool] = {name: False for name in INDICATORS}
         self.odometer = 0
-        self.tripometer = 0
+        self.trip = 0.0
+        self.mfa_index = mfa.DEFAULT_INDEX
         self.dirty = True
         self.source_name = "none"
 
@@ -56,6 +57,22 @@ class DashState:
 
     def is_stale(self, key: str) -> bool:
         return self.age(key) > config.STALE_AFTER
+
+    @property
+    def mfa_mode(self) -> mfa.Mode:
+        return mfa.MODES[self.mfa_index]
+
+    def cycle_mfa(self, step: int = 1) -> None:
+        self.mfa_index = mfa.next_index(self.mfa_index, step)
+        self.dirty = True
+
+    def mfa_value(self) -> float:
+        """The number the active MFA mode displays. The clock is drawn by the
+        renderer from the system time, so it has no numeric value here."""
+        mode = self.mfa_mode
+        if mode.source == "trip":
+            return self.trip
+        return self.values.get(mode.source, 0.0)
 
     @property
     def fuel_reserve(self) -> bool:

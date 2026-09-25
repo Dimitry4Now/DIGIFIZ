@@ -16,10 +16,14 @@ resolution-independent rendering and a test suite.
 
 ## What it does
 
-- Tachometer, speedometer, clock, odometer and MFA readout.
+- Tachometer, speedometer, clock, odometer and trip counter.
+- MFA panel with all six readings and the original mode chips: consumption in
+  L/100KM, average speed, oil temperature, ambient temperature, trip distance
+  and the clock. One chip lights at a time, as on the real cluster.
 - Four aux gauges: coolant temperature, exhaust gas temperature, oil pressure
   and boost.
 - Ten indicator lamps plus the fuel reserve warning.
+- A startup bulb check that sweeps every gauge and lights every lamp.
 - Resolution independent: the artwork is authored at 1920x720 and scaled once at
   startup to whatever panel it finds, letterboxed and centred. An 800x480 5 inch
   panel and a 1920x720 stretched cluster LCD both work with no code changes.
@@ -36,6 +40,34 @@ python3 -m venv .venv
 ```
 
 `--debug` overlays frame timing, the active source and every live value.
+
+For the whole thing end to end — intro, bulb check, then every scenario with
+the MFA stepping through its modes and the odometer running:
+
+```bash
+tools/demo_suite.sh 800x480 15
+```
+
+### Keys
+
+| Key | What it does |
+|---|---|
+| `m` or `→` | Next MFA mode |
+| `←` | Previous MFA mode |
+| `Esc` or `q` | Quit |
+
+### Useful flags
+
+| Flag | What it does |
+|---|---|
+| `--selftest [SECONDS]` | Bulb check on startup: all gauges sweep, all lamps light |
+| `--mfa-cycle SECONDS` | Step the MFA automatically (default 4s with `demo`) |
+| `--odometer KM` / `--trip KM` | Start the counters somewhere believable |
+| `--time-scale N` | Run simulated time N times faster, so kilometres tick over while you watch |
+| `--size WxH` | Preview a panel you do not physically have |
+
+Demo distance is never written back to `odo.txt`, so a demo cannot inflate the
+real odometer.
 
 ## Data sources
 
@@ -61,7 +93,10 @@ engine/egt/state          °C         0..500
 engine/oilpressure/state  psi        0..80
 engine/boost/state        psi        0..30
 engine/fuel/state         litres     0..60
+engine/consumption/state  L/100km    0..30
+engine/oil_temp/state     °C        40..150
 cabin/speed_cv/state      km/h       0..199
+cabin/avg_speed/state     km/h       0..199
 cabin/outside_temp/state  °C       -40..60
 indicator/<name>/state    0 or 1
 ```
@@ -90,6 +125,8 @@ One line per update, keys optional, so a sketch can send only what it has:
 ```
 D rpm=1850 egt=430 boost=12.4 oilp=45 clt=88 fuel=32 spd=62 ind=0x1A4
 ```
+
+Recognised keys: `rpm`, `egt`, `boost`, `oilp`, `clt`, `fuel`, `spd`, `oat`.
 
 `ind` is a bitfield over the ten indicator lamps, bit 0 first.
 
@@ -157,7 +194,7 @@ inch panel, the KMS/DRM setup and the systemd unit.
 
 Covers unit-to-frame scaling, the MQTT and serial parsers, odometer persistence
 and debounce, layout scaling at several panel sizes, the simulator staying
-renderable, and the repaint gate. The renderer tests run headless on SDL's dummy
+renderable, MFA mode switching and chip lighting, and the repaint gate. The renderer tests run headless on SDL's dummy
 video driver.
 
 ## Layout of the repository
@@ -167,6 +204,7 @@ digifiz/            the dash itself
   app.py            display setup, render loop, frame pacing
   config.py         tunables and environment variables
   layout.py         every coordinate, in logical space
+  mfa.py            the MFA's modes and their label chips
   assets.py         load, convert and pre-scale artwork once
   render.py         drawing and the repaint gate
   scaling.py        engineering units to artwork frames

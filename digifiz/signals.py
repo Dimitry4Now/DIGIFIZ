@@ -42,6 +42,10 @@ SIGNALS: tuple[Signal, ...] = (
     Signal("fuel", "engine/fuel/state", "L", 0, 60),
     Signal("speed", "cabin/speed_cv/state", "km/h", 0, 199),
     Signal("outside_temp", "cabin/outside_temp/state", "C", -40, 60),
+    # MFA readings. They have no gauge artwork, only digits.
+    Signal("consumption", "engine/consumption/state", "L/100km", 0, 30, decimals=1),
+    Signal("oil_temp", "engine/oil_temp/state", "C", 40, 150),
+    Signal("avg_speed", "cabin/avg_speed/state", "km/h", 0, 199),
 )
 
 BY_KEY: dict[str, Signal] = {s.key: s for s in SIGNALS}

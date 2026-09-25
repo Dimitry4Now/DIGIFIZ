@@ -15,6 +15,7 @@ from .assets import AssetCache, load_intro_frames
 from .layout import Geometry
 from .odometer import Odometer
 from .render import Renderer
+from .signals import BY_KEY, INDICATORS
 from .simulation import names as scenario_names
 from .sources import build_source
 from .state import DashState
@@ -54,6 +55,44 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument(
         "--intro", action="store_true", help="play the intro frames before the dash"
+    )
+    parser.add_argument(
+        "--selftest",
+        type=float,
+        nargs="?",
+        const=3.0,
+        default=None,
+        metavar="SECONDS",
+        help="sweep every gauge and light every lamp on startup, like the "
+        "cluster's own bulb check (default 3 seconds when given without a value)",
+    )
+    parser.add_argument(
+        "--mfa-cycle",
+        type=float,
+        metavar="SECONDS",
+        help="step the MFA through its modes automatically; 0 disables "
+        "(defaults to 4 seconds with the demo source, off otherwise)",
+    )
+    parser.add_argument(
+        "--odometer", type=int, metavar="KM", help="start the odometer here"
+    )
+    parser.add_argument(
+        "--trip", type=float, metavar="KM", help="start the trip counter here"
+    )
+    parser.add_argument(
+        "--save-odometer",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help="write distance back to odo.txt (off with the demo source, so a "
+        "demo never inflates the real odometer)",
+    )
+    parser.add_argument(
+        "--time-scale",
+        type=float,
+        default=1.0,
+        metavar="N",
+        help="run simulated time N times faster, so distance-based readings "
+        "move while you watch (demo source only)",
     )
     parser.add_argument(
         "--exit-after",
@@ -118,6 +157,46 @@ def play_intro(surface: pygame.Surface, geometry: Geometry) -> None:
         clock.tick(config.INTRO_FPS)
 
 
+def play_selftest(
+    surface: pygame.Surface,
+    renderer: Renderer,
+    state: DashState,
+    seconds: float,
+) -> None:
+    """The cluster's own startup check: everything to full, then back to zero.
+
+    Real Digifiz clusters light every segment and lamp briefly at power-up so a
+    dead one is obvious. It doubles as a quick proof that every frame of every
+    gauge loaded.
+    """
+    clock = pygame.time.Clock()
+    elapsed = 0.0
+    while elapsed < seconds:
+        dt = clock.tick(config.FPS) / 1000.0
+        elapsed += dt
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
+                return
+
+        # Up for the first half, back down for the second.
+        half = seconds / 2
+        fraction = elapsed / half if elapsed < half else max(0.0, 2 - elapsed / half)
+        for key, signal in BY_KEY.items():
+            state.values[key] = signal.lo + (signal.hi - signal.lo) * fraction
+        lit = fraction > 0.05
+        for name in INDICATORS:
+            state.indicators[name] = lit
+        state.mfa_index = int(elapsed * 4) % 6
+
+        renderer.draw(surface, state)
+        pygame.display.flip()
+
+    for key, signal in BY_KEY.items():
+        state.values[key] = signal.lo
+    for name in INDICATORS:
+        state.indicators[name] = False
+
+
 def run(args: argparse.Namespace) -> int:
     surface = init_display(args)
     geometry = Geometry.for_display(surface.get_size())
@@ -135,15 +214,38 @@ def run(args: argparse.Namespace) -> int:
     renderer = Renderer(geometry, assets)
     state = DashState()
     odometer = Odometer()
+    if args.odometer is not None:
+        odometer.odometer = args.odometer
+    if args.trip is not None:
+        odometer.trip = args.trip
     state.odometer = odometer.odometer
-    state.tripometer = odometer.trip
+    state.trip = float(odometer.trip)
+
+    if args.selftest:
+        play_selftest(surface, renderer, state, args.selftest)
 
     source = build_source(args.source, scenario=args.scenario)
     source.start()
     state.source_name = source.name
 
+    mfa_cycle = args.mfa_cycle
+    if mfa_cycle is None:
+        mfa_cycle = 4.0 if args.source == "demo" else 0.0
+    mfa_timer = 0.0
+
+    # Speeding up simulated time is what makes distance-based readings, the
+    # odometer and the trip counter, actually move during a short demo.
+    time_scale = max(0.1, args.time_scale) if args.source == "demo" else 1.0
+
+    save_odometer = args.save_odometer
+    if save_odometer is None:
+        save_odometer = args.source != "demo"
+    if not save_odometer:
+        log.info("odometer is not being saved (demo distance stays out of odo.txt)")
+
     clock = pygame.time.Clock()
     distance = float(odometer.odometer)
+    trip = float(odometer.trip)
     last_signature: tuple | None = None
     drawn = skipped = 0
     running = True
@@ -157,22 +259,36 @@ def run(args: argparse.Namespace) -> int:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-                elif event.type == pygame.KEYDOWN and event.key in (
-                    pygame.K_ESCAPE,
-                    pygame.K_q,
-                ):
-                    running = False
+                elif event.type == pygame.KEYDOWN:
+                    if event.key in (pygame.K_ESCAPE, pygame.K_q):
+                        running = False
+                    elif event.key in (pygame.K_m, pygame.K_RIGHT):
+                        state.cycle_mfa()
+                        mfa_timer = 0.0
+                    elif event.key == pygame.K_LEFT:
+                        state.cycle_mfa(-1)
+                        mfa_timer = 0.0
 
             state.apply(source.drain())
 
-            # Distance from speed: km/h for dt seconds. The odometer only goes
-            # dirty when the whole-kilometre value changes.
-            distance += state.values["speed"] * dt / 3600.0
+            if mfa_cycle:
+                mfa_timer += dt
+                if mfa_timer >= mfa_cycle:
+                    mfa_timer = 0.0
+                    state.cycle_mfa()
+
+            # Distance from speed: km/h for dt seconds.
+            travelled = state.values["speed"] * dt * time_scale / 3600.0
+            distance += travelled
+            trip += travelled
+            state.trip = trip
             whole = int(distance)
             if whole != state.odometer:
                 state.odometer = whole
                 odometer.odometer = whole
-            odometer.maybe_write()
+            odometer.trip = trip
+            if save_odometer:
+                odometer.maybe_write()
 
             # Everything below this line is the expensive part. A frame that
             # would look identical to the last one is not drawn at all, so a
@@ -203,7 +319,8 @@ def run(args: argparse.Namespace) -> int:
             drawn += 1
     finally:
         source.stop()
-        odometer.maybe_write(force=True)
+        if save_odometer:
+            odometer.maybe_write(force=True)
         pygame.quit()
 
     log.info(

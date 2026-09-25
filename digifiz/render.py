@@ -85,12 +85,13 @@ class Renderer:
         digits = (
             int(round(state.values["speed"])),
             int(round(state.values["fuel"])),
-            int(round(state.values["outside_temp"])),
             state.odometer,
+            state.mfa_index,
+            self.mfa_text(state),
         )
         stale = tuple(
             state.age(key) > config.STALE_AFTER
-            for key in ("speed", "fuel", "outside_temp")
+            for key in ("speed", "fuel", state.mfa_mode.source)
         )
         lamps = tuple(state.indicators[name] for name in INDICATORS)
         return (
@@ -118,7 +119,6 @@ class Renderer:
     def _draw_rpm(self, target: pygame.Surface, state: DashState) -> None:
         index = frame_for(BY_KEY["rpm"], state.values["rpm"])
         target.blit(self.assets.rpm_frames[index], self.geometry.point(layout.RPM))
-        target.blit(self.assets.rpm_label, self.geometry.point(layout.RPM_LABEL))
 
     def _draw_aux(self, target: pygame.Surface, state: DashState) -> None:
         for key, position in layout.AUX.items():
@@ -146,12 +146,24 @@ class Renderer:
         target.blit(self.text("medium", now, config.NEON_GREEN), position)
 
     def _draw_mfa(self, target: pygame.Surface, state: DashState) -> None:
-        target.blit(self.assets.mfa, self.geometry.point(layout.MFA_BACKGROUND))
-        value = str(int(round(state.values["outside_temp"])))
-        color = self._color(state, "outside_temp", config.NEON_GREEN)
-        self._blit_midright(
-            target, self.text("medium", value, color), layout.MFA_TEMP_RIGHT
+        mode = state.mfa_mode
+        target.blit(
+            self.assets.mfa_modes[mode.key], self.geometry.point(layout.MFA_BACKGROUND)
         )
+        color = self._color(state, mode.source, config.NEON_GREEN)
+        self._blit_midright(
+            target, self.text("medium", self.mfa_text(state), color),
+            layout.MFA_TEMP_RIGHT,
+        )
+
+    @staticmethod
+    def mfa_text(state: DashState) -> str:
+        """The digits for the active MFA mode."""
+        mode = state.mfa_mode
+        if mode.source == "clock":
+            return datetime.now().strftime("%H:%M")
+        value = state.mfa_value()
+        return f"{value:.{mode.decimals}f}" if mode.decimals else str(int(round(value)))
 
     def _draw_numbers(self, target: pygame.Surface, state: DashState) -> None:
         speed = str(int(round(state.values["speed"])))
