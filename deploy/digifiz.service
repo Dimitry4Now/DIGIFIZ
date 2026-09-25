@@ -1,0 +1,35 @@
+# Digifiz dash as a system service.
+#
+#   sudo cp deploy/digifiz.service /etc/systemd/system/
+#   sudo systemctl enable --now digifiz
+#
+# Adjust User, WorkingDirectory and the ExecStart path if the checkout is not
+# in /home/pi/DIGIFIZ.
+
+[Unit]
+Description=Digifiz dash
+After=multi-user.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/DIGIFIZ
+
+# Draw straight to the panel through DRM/KMS: no X11, no Wayland, no desktop
+# session and no compositor in the way.
+Environment=SDL_VIDEODRIVER=kmsdrm
+Environment=PYTHONUNBUFFERED=1
+Environment=DIGIFIZ_SOURCE=mqtt
+Environment=DIGIFIZ_MQTT_HOST=localhost
+
+ExecStart=/home/pi/DIGIFIZ/.venv/bin/python -m digifiz.app
+
+Restart=always
+RestartSec=2
+# A cluster loses power without a shutdown, so never give up restarting.
+StartLimitBurst=0
+
+[Install]
+WantedBy=multi-user.target

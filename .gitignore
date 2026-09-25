@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+# Local development
+.venv/
+venv/
+.DS_Store
+images/intro/
+odo.txt.tmp
+.pytest_cache/

@@ -1,0 +1,7 @@
+paho-mqtt==2.1.0
+pygame-ce==2.5.8
+pyserial==3.5
+
+# Optional extras, install only if you need them:
+#   pyserial is already above and is required by DIGIFIZ_SOURCE=serial
+#   obd>=0.7.2   for DIGIFIZ_SOURCE=obd (needs a car with an OBD-II ECU)
