@@ -14,6 +14,20 @@ which supplied the original artwork and the idea of driving it from pygame. The
 code has since been rebuilt around a package layout, a data-source abstraction,
 resolution-independent rendering and a test suite.
 
+## Demo
+
+[![The dash running the sweep scenario](docs/demo.jpg)](docs/demo.mp4)
+
+From a clean terminal: the intro frames are extracted, then the dash starts on
+the demo source with the `sweep` scenario, which takes every gauge, every lamp
+and the odometer from end to end while the MFA steps to its next mode every 3
+seconds. Click the image for the video.
+
+```bash
+tools/extract_intro.sh das_auto.mp4 1366x768
+.venv/bin/python main.py --source demo --scenario sweep --mfa-cycle 3 --size 1366x768
+```
+
 ## What it does
 
 - Tachometer, speedometer, clock, odometer and trip counter.
