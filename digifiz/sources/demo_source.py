@@ -29,3 +29,7 @@ class DemoSource(DataSource):
         dt = now - self._last
         self._last = now
         return self.scenario.step(dt)
+
+    @property
+    def odometer(self) -> int | None:
+        return self.scenario.odometer

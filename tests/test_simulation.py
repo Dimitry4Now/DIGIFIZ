@@ -49,6 +49,23 @@ def test_sweep_reaches_both_ends():
     assert max(seen) > 4900
 
 
+def test_sweep_runs_the_odometer_end_to_end():
+    scenario = simulation.build("sweep")
+    seen = []
+    for _ in range(400):
+        scenario.step(0.05)
+        seen.append(scenario.odometer)
+    assert min(seen) == 0
+    assert max(seen) == 999_999
+
+
+@pytest.mark.parametrize("name", sorted(set(simulation.names()) - {"sweep"}))
+def test_other_scenarios_leave_the_odometer_alone(name):
+    scenario = simulation.build(name)
+    scenario.step(0.05)
+    assert scenario.odometer is None
+
+
 def test_warnings_lights_every_lamp():
     scenario = simulation.build("warnings")
     lit = set()

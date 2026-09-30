@@ -47,6 +47,12 @@ class DataSource:
             return batch
 
     @property
+    def odometer(self) -> int | None:
+        """A reading to show in place of the real odometer, if the source has
+        one. Only the demo source does, for scenarios that exercise the digits."""
+        return None
+
+    @property
     def status(self) -> str:
         if self.last_error:
             return f"{self.name}: {self.last_error}"

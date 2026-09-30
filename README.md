@@ -158,7 +158,7 @@ Used by both `--source demo` and `tools/mqtt_sim.py`:
 |---|---|
 | `idle` | Warm engine, stationary. Proves idle frames are skipped. |
 | `drive` | A drive cycle with turbo lag, EGT inertia and a warm-up. |
-| `sweep` | Every gauge end to end. Checks all artwork and the layout. |
+| `sweep` | Every gauge end to end, and with `--source demo` the odometer from 000000 to 999999 too. Checks all artwork and the layout. |
 | `warnings` | Each lamp in turn, blinking turn signals, fuel below reserve. |
 | `cold-start` | Glow plugs, cold coolant, oil pressure lamp clearing. |
 

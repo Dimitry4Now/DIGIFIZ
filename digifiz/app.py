@@ -378,7 +378,12 @@ def run(args: argparse.Namespace) -> int:
             trip += travelled
             state.trip = trip
             whole = int(distance)
-            if whole != state.odometer:
+            shown = source.odometer
+            if shown is not None:
+                # A scenario driving the digits for show: display it, but keep
+                # it away from the real odometer and so out of odo.txt.
+                state.odometer = shown
+            elif whole != state.odometer:
                 state.odometer = whole
                 odometer.odometer = whole
             odometer.trip = trip

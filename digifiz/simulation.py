@@ -54,6 +54,10 @@ class Scenario:
         self.t = 0.0
         self.values: Sample = {key: 0.0 for key in BY_KEY}
         self.values.update({name: False for name in INDICATORS})
+        #: A reading to show on the odometer instead of distance driven, or
+        #: None to leave it alone. It is not a signal, so it stays out of the
+        #: samples and is never published or saved.
+        self.odometer: int | None = None
 
     def step(self, dt: float) -> Sample:
         self.t += dt
@@ -167,16 +171,22 @@ class Drive(Scenario):
 
 
 class Sweep(Scenario):
-    """Every gauge driven end to end, for layout and asset checks."""
+    """Every gauge driven end to end, for layout and asset checks.
+
+    The odometer runs with them, 000000 to 999999 and back, so every digit of
+    it gets exercised too.
+    """
 
     name = "sweep"
     PERIOD = 8.0
+    ODOMETER_MAX = 999_999
 
     def advance(self, dt: float) -> None:
         phase = (self.t % self.PERIOD) / self.PERIOD
         triangle = 1.0 - abs(2.0 * phase - 1.0)
         for key, signal in BY_KEY.items():
             self.values[key] = signal.lo + (signal.hi - signal.lo) * triangle
+        self.odometer = round(self.ODOMETER_MAX * triangle)
         lit = (self.t % 2.0) < 1.0
         for name in INDICATORS:
             self.values[name] = lit
