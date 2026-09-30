@@ -16,12 +16,13 @@ resolution-independent rendering and a test suite.
 
 ## Demo
 
-[![The dash running the sweep scenario](docs/demo.jpg)](docs/demo.mp4)
+[![The dash running the sweep scenario](docs/demo.gif)](https://youtu.be/N0CBcHBoG0A)
 
-From a clean terminal: the intro frames are extracted, then the dash starts on
-the demo source with the `sweep` scenario, which takes every gauge, every lamp
-and the odometer from end to end while the MFA steps to its next mode every 3
-seconds. Click the image for the video.
+The `sweep` scenario on the demo source: every gauge, every lamp and the
+odometer from end to end, while the MFA steps to its next mode every 3 seconds.
+The [full video on YouTube](https://youtu.be/N0CBcHBoG0A) (56 s) starts from a
+clean terminal, with the intro frames being extracted and the intro playing
+before the dash.
 
 ```bash
 tools/extract_intro.sh das_auto.mp4 1366x768
