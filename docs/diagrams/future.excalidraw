@@ -1,0 +1,1347 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "phys_mz",
+      "type": "rectangle",
+      "x": 60,
+      "y": 100,
+      "width": 180,
+      "height": 60,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#d4edda",
+      "fillStyle": "hachure",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_mz_raw"
+        },
+        {
+          "type": "text",
+          "id": "phys_mz_text"
+        }
+      ],
+      "version": 2,
+      "versionNonce": 1810937325,
+      "index": "a0",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "updated": 1790794030335,
+      "created": null,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "phys_mz_text",
+      "type": "text",
+      "x": 70,
+      "y": 115,
+      "width": 160,
+      "height": 30,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "1972 MZ TS250/1 MCU\n(Hall, Ignition, Switches)",
+      "fontSize": 13,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "phys_mz",
+      "version": 2,
+      "versionNonce": 286239587,
+      "index": "a1",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030335,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "originalText": "1972 MZ TS250/1 MCU\n(Hall, Ignition, Switches)",
+      "autoResize": true,
+      "lineHeight": 1.1538461538461537,
+      "labelPosition": null,
+      "baseFontSize": null
+    },
+    {
+      "id": "phys_sim",
+      "type": "rectangle",
+      "x": 60,
+      "y": 180,
+      "width": 180,
+      "height": 50,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#cce5ff",
+      "fillStyle": "hachure",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_sim_raw"
+        },
+        {
+          "type": "text",
+          "id": "phys_sim_text"
+        }
+      ],
+      "version": 2,
+      "versionNonce": 161312845,
+      "index": "a2",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "updated": 1790794030335,
+      "created": null,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "phys_sim_text",
+      "type": "text",
+      "x": 70,
+      "y": 195,
+      "width": 160,
+      "height": 20,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Vehicle Simulator",
+      "fontSize": 13,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "phys_sim",
+      "version": 2,
+      "versionNonce": 2104116995,
+      "index": "a3",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030335,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "originalText": "Vehicle Simulator",
+      "autoResize": true,
+      "lineHeight": 1.5384615384615385,
+      "labelPosition": null,
+      "baseFontSize": null
+    },
+    {
+      "id": "phys_replay",
+      "type": "rectangle",
+      "x": 60,
+      "y": 250,
+      "width": 180,
+      "height": 50,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#e2d9f3",
+      "fillStyle": "hachure",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_replay_raw"
+        },
+        {
+          "type": "text",
+          "id": "phys_replay_text"
+        }
+      ],
+      "version": 2,
+      "versionNonce": 444849837,
+      "index": "a4",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "updated": 1790794030335,
+      "created": null,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "phys_replay_text",
+      "type": "text",
+      "x": 70,
+      "y": 265,
+      "width": 160,
+      "height": 20,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Recorded Ride Replay",
+      "fontSize": 13,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "phys_replay",
+      "version": 2,
+      "versionNonce": 657485475,
+      "index": "a5",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030335,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "originalText": "Recorded Ride Replay",
+      "autoResize": true,
+      "lineHeight": 1.5384615384615385,
+      "labelPosition": null,
+      "baseFontSize": null
+    },
+    {
+      "id": "phys_legacy",
+      "type": "rectangle",
+      "x": 93,
+      "y": 320,
+      "width": 147,
+      "height": 56.99999999999997,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#fff3cd",
+      "fillStyle": "hachure",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_legacy_raw"
+        },
+        {
+          "type": "text",
+          "id": "phys_legacy_text"
+        }
+      ],
+      "version": 57,
+      "versionNonce": 519821891,
+      "index": "a6",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "updated": 1790794056057,
+      "created": null,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "phys_legacy_text",
+      "type": "text",
+      "x": 112.46546173095703,
+      "y": 328.5,
+      "width": 108.06907653808594,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "MQTT / Serial /\nNode-RED",
+      "fontSize": 13,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "phys_legacy",
+      "version": 59,
+      "versionNonce": 531470819,
+      "index": "a7",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794056057,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "originalText": "MQTT / Serial / Node-RED",
+      "autoResize": true,
+      "lineHeight": 1.5384615384615385,
+      "labelPosition": null,
+      "baseFontSize": null
+    },
+    {
+      "id": "raw_badge",
+      "type": "rectangle",
+      "x": 290,
+      "y": 200,
+      "width": 150,
+      "height": 70,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#e9ecef",
+      "fillStyle": "hachure",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_mz_raw"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_sim_raw"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_replay_raw"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_legacy_raw"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_raw_rec"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_raw_proc"
+        },
+        {
+          "type": "text",
+          "id": "raw_text"
+        }
+      ],
+      "version": 2,
+      "versionNonce": 1601427309,
+      "index": "a8",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "raw_text",
+      "type": "text",
+      "x": 300,
+      "y": 215,
+      "width": 130,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "RAW TELEMETRY\n(Pulses, Timestamps,\nRaw Volts)",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "raw_badge",
+      "version": 2,
+      "versionNonce": 1676239331,
+      "index": "a9",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "originalText": "RAW TELEMETRY\n(Pulses, Timestamps,\nRaw Volts)",
+      "autoResize": true,
+      "lineHeight": 1.1111111111111112,
+      "labelPosition": null,
+      "baseFontSize": null
+    },
+    {
+      "id": "recorder_box",
+      "type": "rectangle",
+      "x": 290,
+      "y": 330,
+      "width": 150,
+      "height": 50,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#e2d9f3",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_raw_rec"
+        },
+        {
+          "type": "text",
+          "id": "recorder_text"
+        }
+      ],
+      "version": 2,
+      "versionNonce": 859857357,
+      "index": "aA",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "recorder_text",
+      "type": "text",
+      "x": 300,
+      "y": 345,
+      "width": 130,
+      "height": 20,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Logger / File Storage",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "recorder_box",
+      "version": 2,
+      "versionNonce": 1758014851,
+      "index": "aB",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "originalText": "Logger / File Storage",
+      "autoResize": true,
+      "lineHeight": 1.6666666666666667,
+      "labelPosition": null,
+      "baseFontSize": null
+    },
+    {
+      "id": "proc_box",
+      "type": "rectangle",
+      "x": 490,
+      "y": 170,
+      "width": 210,
+      "height": 130,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#f8d7da",
+      "fillStyle": "hachure",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_raw_proc"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_config_proc"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_proc_state"
+        },
+        {
+          "type": "text",
+          "id": "proc_text"
+        }
+      ],
+      "version": 2,
+      "versionNonce": 1171038253,
+      "index": "aC",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "proc_text",
+      "type": "text",
+      "x": 500,
+      "y": 185,
+      "width": 190,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "TELEMETRY PROCESSING\n---------------------\n- Pulse -> Speed/Dist/RPM\n- Debounce & Calibration\n- Fault & Stale Detection\n- Odometer / Trip Calculations",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": "proc_box",
+      "version": 2,
+      "versionNonce": 1122927907,
+      "index": "aD",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "originalText": "TELEMETRY PROCESSING\n---------------------\n- Pulse -> Speed/Dist/RPM\n- Debounce & Calibration\n- Fault & Stale Detection\n- Odometer / Trip Calculations",
+      "autoResize": true,
+      "lineHeight": 1.388888888888889,
+      "labelPosition": null,
+      "baseFontSize": null
+    },
+    {
+      "id": "config_box",
+      "type": "rectangle",
+      "x": 490,
+      "y": 60,
+      "width": 210,
+      "height": 60,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#ffeba2",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_config_proc"
+        },
+        {
+          "type": "text",
+          "id": "config_text"
+        }
+      ],
+      "version": 2,
+      "versionNonce": 218239629,
+      "index": "aE",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "config_text",
+      "type": "text",
+      "x": 500,
+      "y": 70,
+      "width": 190,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Vehicle Configuration\n(Wheel Circ, PPR, Limits)",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "config_box",
+      "version": 2,
+      "versionNonce": 1237838019,
+      "index": "aF",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "originalText": "Vehicle Configuration\n(Wheel Circ, PPR, Limits)",
+      "autoResize": true,
+      "lineHeight": 1.6666666666666667,
+      "labelPosition": null,
+      "baseFontSize": null
+    },
+    {
+      "id": "state_badge",
+      "type": "rectangle",
+      "x": 743,
+      "y": 200,
+      "width": 167,
+      "height": 73,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#d1ecf1",
+      "fillStyle": "hachure",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_proc_state"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_state_viz"
+        },
+        {
+          "type": "text",
+          "id": "state_text"
+        }
+      ],
+      "version": 15,
+      "versionNonce": 809579629,
+      "index": "aG",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "updated": 1790794063453,
+      "created": null,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "state_text",
+      "type": "text",
+      "x": 760.6255264282227,
+      "y": 209.83333333333334,
+      "width": 131.7489471435547,
+      "height": 53.333333333333336,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "DERIVED VEHICLE\nSTATE\n(VehicleState Model +\nQuality / Fault Flags)",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "state_badge",
+      "version": 17,
+      "versionNonce": 475668173,
+      "index": "aH",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794063453,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "originalText": "DERIVED VEHICLE STATE\n(VehicleState Model +\nQuality / Fault Flags)",
+      "autoResize": true,
+      "lineHeight": 1.1111111111111112,
+      "labelPosition": null,
+      "baseFontSize": null
+    },
+    {
+      "id": "viz_box",
+      "type": "rectangle",
+      "x": 960,
+      "y": 170,
+      "width": 190,
+      "height": 130,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#e2d9f3",
+      "fillStyle": "hachure",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_state_viz"
+        },
+        {
+          "type": "text",
+          "id": "viz_text"
+        }
+      ],
+      "version": 2,
+      "versionNonce": 1495176013,
+      "index": "aI",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "viz_text",
+      "type": "text",
+      "x": 970,
+      "y": 185,
+      "width": 170,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "DIGIFIZ VISUALIZER\n------------------\n- Digital Gauges\n- RPM Segment Bar\n- Telltale Indicators\n- Odometer Display",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": "viz_box",
+      "version": 2,
+      "versionNonce": 1010881539,
+      "index": "aJ",
+      "isDeleted": false,
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "originalText": "DIGIFIZ VISUALIZER\n------------------\n- Digital Gauges\n- RPM Segment Bar\n- Telltale Indicators\n- Odometer Display",
+      "autoResize": true,
+      "lineHeight": 1.388888888888889,
+      "labelPosition": null,
+      "baseFontSize": null
+    },
+    {
+      "id": "arrow_mz_raw",
+      "type": "arrow",
+      "x": 240,
+      "y": 130,
+      "width": 50,
+      "height": 85,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          85
+        ]
+      ],
+      "startBinding": {
+        "mode": "orbit",
+        "elementId": "phys_mz",
+        "fixedPoint": [
+          0.8579491223445358,
+          0.14205087765546456
+        ]
+      },
+      "endBinding": {
+        "mode": "orbit",
+        "elementId": "raw_badge",
+        "fixedPoint": [
+          0.3414522189264778,
+          0.6585477810735227
+        ]
+      },
+      "endArrowhead": "arrow",
+      "version": 2,
+      "versionNonce": 1139319213,
+      "index": "aK",
+      "isDeleted": false,
+      "fillStyle": "solid",
+      "backgroundColor": "transparent",
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "startArrowhead": null
+    },
+    {
+      "id": "arrow_sim_raw",
+      "type": "arrow",
+      "x": 240,
+      "y": 205,
+      "width": 50,
+      "height": 20,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          20
+        ]
+      ],
+      "startBinding": {
+        "mode": "orbit",
+        "elementId": "phys_sim",
+        "fixedPoint": [
+          0.7317737454739668,
+          0.26822625452603405
+        ]
+      },
+      "endBinding": {
+        "mode": "orbit",
+        "elementId": "raw_badge",
+        "fixedPoint": [
+          0.4922015097683288,
+          0.5077984902316725
+        ]
+      },
+      "endArrowhead": "arrow",
+      "version": 2,
+      "versionNonce": 1168989091,
+      "index": "aL",
+      "isDeleted": false,
+      "fillStyle": "solid",
+      "backgroundColor": "transparent",
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "startArrowhead": null
+    },
+    {
+      "id": "arrow_replay_raw",
+      "type": "arrow",
+      "x": 240,
+      "y": 275,
+      "width": 50,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          -25
+        ]
+      ],
+      "startBinding": {
+        "mode": "orbit",
+        "elementId": "phys_replay",
+        "fixedPoint": [
+          0.7676213001385281,
+          0.7676213001385281
+        ]
+      },
+      "endBinding": {
+        "mode": "orbit",
+        "elementId": "raw_badge",
+        "fixedPoint": [
+          0.4629042045373713,
+          0.5370957954626293
+        ]
+      },
+      "endArrowhead": "arrow",
+      "version": 2,
+      "versionNonce": 992076813,
+      "index": "aM",
+      "isDeleted": false,
+      "fillStyle": "solid",
+      "backgroundColor": "transparent",
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "startArrowhead": null
+    },
+    {
+      "id": "arrow_legacy_raw",
+      "type": "arrow",
+      "x": 245.75,
+      "y": 340.82240768644715,
+      "width": 52.83544190649661,
+      "height": 66.28238131514786,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          52.83544190649661,
+          -66.28238131514786
+        ]
+      ],
+      "startBinding": {
+        "mode": "orbit",
+        "elementId": "phys_legacy",
+        "fixedPoint": [
+          0.8800216434179678,
+          0.8800216434179685
+        ]
+      },
+      "endBinding": {
+        "mode": "orbit",
+        "elementId": "raw_badge",
+        "fixedPoint": [
+          0.33043684647172883,
+          0.33043684647172916
+        ]
+      },
+      "endArrowhead": "arrow",
+      "version": 56,
+      "versionNonce": 256271747,
+      "index": "aN",
+      "isDeleted": false,
+      "fillStyle": "solid",
+      "backgroundColor": "transparent",
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794056060,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "startArrowhead": null,
+      "moveMidPointsWithElement": false
+    },
+    {
+      "id": "arrow_raw_rec",
+      "type": "arrow",
+      "x": 365,
+      "y": 270,
+      "width": 0,
+      "height": 60,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          60
+        ]
+      ],
+      "startBinding": {
+        "mode": "orbit",
+        "elementId": "raw_badge",
+        "fixedPoint": [
+          0.5001,
+          0.5001
+        ]
+      },
+      "endBinding": {
+        "mode": "orbit",
+        "elementId": "recorder_box",
+        "fixedPoint": [
+          0.5001,
+          0.5001
+        ]
+      },
+      "endArrowhead": "arrow",
+      "version": 2,
+      "versionNonce": 1388567149,
+      "index": "aO",
+      "isDeleted": false,
+      "fillStyle": "solid",
+      "backgroundColor": "transparent",
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "startArrowhead": null
+    },
+    {
+      "id": "arrow_raw_proc",
+      "type": "arrow",
+      "x": 440,
+      "y": 235,
+      "width": 50,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "startBinding": {
+        "mode": "orbit",
+        "elementId": "raw_badge",
+        "fixedPoint": [
+          0.5001,
+          0.5001
+        ]
+      },
+      "endBinding": {
+        "mode": "orbit",
+        "elementId": "proc_box",
+        "fixedPoint": [
+          0.5001,
+          0.5001
+        ]
+      },
+      "endArrowhead": "arrow",
+      "version": 2,
+      "versionNonce": 265228003,
+      "index": "aP",
+      "isDeleted": false,
+      "fillStyle": "solid",
+      "backgroundColor": "transparent",
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "startArrowhead": null
+    },
+    {
+      "id": "arrow_config_proc",
+      "type": "arrow",
+      "x": 595,
+      "y": 120,
+      "width": 0,
+      "height": 50,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          50
+        ]
+      ],
+      "startBinding": {
+        "mode": "orbit",
+        "elementId": "config_box",
+        "fixedPoint": [
+          0.5001,
+          0.5001
+        ]
+      },
+      "endBinding": {
+        "mode": "orbit",
+        "elementId": "proc_box",
+        "fixedPoint": [
+          0.5001,
+          0.5001
+        ]
+      },
+      "endArrowhead": "arrow",
+      "version": 2,
+      "versionNonce": 1670907085,
+      "index": "aQ",
+      "isDeleted": false,
+      "fillStyle": "solid",
+      "backgroundColor": "transparent",
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794030336,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "startArrowhead": null
+    },
+    {
+      "id": "arrow_proc_state",
+      "type": "arrow",
+      "x": 705.7499999999999,
+      "y": 235.72775342608955,
+      "width": 31.500000000000227,
+      "height": 0.20333185454418867,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          31.500000000000227,
+          0.20333185454418867
+        ]
+      ],
+      "startBinding": {
+        "mode": "orbit",
+        "elementId": "proc_box",
+        "fixedPoint": [
+          0.5001,
+          0.5001
+        ]
+      },
+      "endBinding": {
+        "mode": "orbit",
+        "elementId": "state_badge",
+        "fixedPoint": [
+          0.5001,
+          0.5001
+        ]
+      },
+      "endArrowhead": "arrow",
+      "version": 16,
+      "versionNonce": 1051114797,
+      "index": "aR",
+      "isDeleted": false,
+      "fillStyle": "solid",
+      "backgroundColor": "transparent",
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794063457,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "startArrowhead": null,
+      "moveMidPointsWithElement": false
+    },
+    {
+      "id": "arrow_state_viz",
+      "type": "arrow",
+      "x": 915.75,
+      "y": 235.9147502839628,
+      "width": 38.500000000000114,
+      "height": 0.24928294116108418,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          38.500000000000114,
+          -0.24928294116108418
+        ]
+      ],
+      "startBinding": {
+        "mode": "orbit",
+        "elementId": "state_badge",
+        "fixedPoint": [
+          0.5001024286422016,
+          0.4998975713578001
+        ]
+      },
+      "endBinding": {
+        "mode": "orbit",
+        "elementId": "viz_box",
+        "fixedPoint": [
+          0.5001,
+          0.5001
+        ]
+      },
+      "endArrowhead": "arrow",
+      "version": 16,
+      "versionNonce": 2123403149,
+      "index": "aS",
+      "isDeleted": false,
+      "fillStyle": "solid",
+      "backgroundColor": "transparent",
+      "seed": 1,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1790794063459,
+      "created": null,
+      "link": null,
+      "locked": false,
+      "startArrowhead": null,
+      "moveMidPointsWithElement": false
+    }
+  ],
+  "appState": {
+    "gridSize": 20,
+    "gridStep": 5,
+    "gridModeEnabled": false,
+    "viewBackgroundColor": "#ffffff",
+    "lockedMultiSelections": {}
+  },
+  "files": {}
+}

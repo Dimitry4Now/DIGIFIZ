@@ -1,0 +1,1303 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "arduino_mcu",
+      "type": "rectangle",
+      "x": 80,
+      "y": 140,
+      "width": 180,
+      "height": 70,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#69DB7C",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_arduino_adc"
+        }
+      ]
+    },
+    {
+      "id": "arduino_text",
+      "type": "text",
+      "x": 95,
+      "y": 155,
+      "width": 150,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Arduino MCU\nSensor Hub",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "arduino_mcu"
+    },
+    {
+      "id": "adc_pulse_badge",
+      "type": "rectangle",
+      "x": 310,
+      "y": 155,
+      "width": 100,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "#FFD43B",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_arduino_adc"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_adc_api"
+        }
+      ]
+    },
+    {
+      "id": "adc_pulse_text",
+      "type": "text",
+      "x": 320,
+      "y": 165,
+      "width": 80,
+      "height": 20,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Sensor Data",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "adc_pulse_badge"
+    },
+    {
+      "id": "obd_mcu",
+      "type": "rectangle",
+      "x": 80,
+      "y": 300,
+      "width": 180,
+      "height": 70,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#69DB7C",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_obd_pids"
+        }
+      ]
+    },
+    {
+      "id": "obd_text",
+      "type": "text",
+      "x": 95,
+      "y": 315,
+      "width": 150,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "OBD-II Scanner\nECU Diagnostics",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "obd_mcu"
+    },
+    {
+      "id": "ecu_pids_badge",
+      "type": "rectangle",
+      "x": 310,
+      "y": 315,
+      "width": 100,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "#FFD43B",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_obd_pids"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_pids_model"
+        }
+      ]
+    },
+    {
+      "id": "ecu_pids_text",
+      "type": "text",
+      "x": 320,
+      "y": 325,
+      "width": 80,
+      "height": 20,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "ECU Data",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "ecu_pids_badge"
+    },
+    {
+      "id": "mqtt_mcu",
+      "type": "rectangle",
+      "x": 80,
+      "y": 460,
+      "width": 180,
+      "height": 70,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#69DB7C",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_mqtt_json"
+        }
+      ]
+    },
+    {
+      "id": "mqtt_text",
+      "type": "text",
+      "x": 95,
+      "y": 475,
+      "width": 150,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "MQTT Broker\nTelemetry",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "mqtt_mcu"
+    },
+    {
+      "id": "json_mqtt_badge",
+      "type": "rectangle",
+      "x": 300,
+      "y": 475,
+      "width": 120,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "#FFD43B",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_mqtt_json"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_json_model"
+        }
+      ]
+    },
+    {
+      "id": "json_mqtt_text",
+      "type": "text",
+      "x": 310,
+      "y": 485,
+      "width": 100,
+      "height": 20,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "MQTT / JSON",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "json_mqtt_badge"
+    },
+    {
+      "id": "api_box",
+      "type": "rectangle",
+      "x": 480,
+      "y": 140,
+      "width": 200,
+      "height": 70,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#FF922B",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_adc_api"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_api_stream"
+        }
+      ]
+    },
+    {
+      "id": "api_text",
+      "type": "text",
+      "x": 495,
+      "y": 155,
+      "width": 170,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Data Adapter\nInput Handling",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "api_box"
+    },
+    {
+      "id": "stream_badge",
+      "type": "rectangle",
+      "x": 530,
+      "y": 250,
+      "width": 100,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "#FF922B",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_api_stream"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_stream_model"
+        }
+      ]
+    },
+    {
+      "id": "stream_text",
+      "type": "text",
+      "x": 540,
+      "y": 260,
+      "width": 80,
+      "height": 20,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Data Stream",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "stream_badge"
+    },
+    {
+      "id": "model_box",
+      "type": "rectangle",
+      "x": 480,
+      "y": 330,
+      "width": 200,
+      "height": 70,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#FF6B6B",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_pids_model"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_json_model"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_stream_model"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_model_state"
+        }
+      ]
+    },
+    {
+      "id": "model_text",
+      "type": "text",
+      "x": 495,
+      "y": 345,
+      "width": 170,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Signal Model\nDigifiz Core",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "model_box"
+    },
+    {
+      "id": "cluster_state_badge",
+      "type": "rectangle",
+      "x": 730,
+      "y": 345,
+      "width": 120,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "#FF6B6B",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_model_state"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_state_renderer"
+        }
+      ]
+    },
+    {
+      "id": "cluster_state_text",
+      "type": "text",
+      "x": 740,
+      "y": 355,
+      "width": 100,
+      "height": 20,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Display State",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "cluster_state_badge"
+    },
+    {
+      "id": "renderer_box",
+      "type": "rectangle",
+      "x": 900,
+      "y": 330,
+      "width": 200,
+      "height": 70,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#CC5DE8",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_state_renderer"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_renderer_framebuffer"
+        }
+      ]
+    },
+    {
+      "id": "renderer_text",
+      "type": "text",
+      "x": 915,
+      "y": 345,
+      "width": 170,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Renderer\nCluster Graphics",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "renderer_box"
+    },
+    {
+      "id": "framebuffer_badge",
+      "type": "rectangle",
+      "x": 940,
+      "y": 440,
+      "width": 120,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "#ADB5BD",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_renderer_framebuffer"
+        },
+        {
+          "type": "arrow",
+          "id": "arrow_framebuffer_display"
+        }
+      ]
+    },
+    {
+      "id": "framebuffer_text",
+      "type": "text",
+      "x": 950,
+      "y": 450,
+      "width": 100,
+      "height": 20,
+      "angle": 0,
+      "strokeColor": "#495057",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Framebuffer",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "framebuffer_badge"
+    },
+    {
+      "id": "pi_box",
+      "type": "rectangle",
+      "x": 900,
+      "y": 520,
+      "width": 200,
+      "height": 80,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#339AF0",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "boundElements": [
+        {
+          "type": "arrow",
+          "id": "arrow_framebuffer_display"
+        }
+      ]
+    },
+    {
+      "id": "pi_text",
+      "type": "text",
+      "x": 915,
+      "y": 540,
+      "width": 170,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Display\nDigifiz Screen",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "verticalAlign": "middle",
+      "containerId": "pi_box"
+    },
+    {
+      "id": "arrow_arduino_adc",
+      "type": "arrow",
+      "x": 260,
+      "y": 175,
+      "width": 50,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "startBinding": {
+        "elementId": "arduino_mcu",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "adc_pulse_badge",
+        "focus": 0,
+        "gap": 1
+      }
+    },
+    {
+      "id": "arrow_adc_api",
+      "type": "arrow",
+      "x": 410,
+      "y": 175,
+      "width": 70,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          70,
+          0
+        ]
+      ],
+      "startBinding": {
+        "elementId": "adc_pulse_badge",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "api_box",
+        "focus": 0,
+        "gap": 1
+      },
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "arrow_obd_pids",
+      "type": "arrow",
+      "x": 260,
+      "y": 335,
+      "width": 50,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "startBinding": {
+        "elementId": "obd_mcu",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "ecu_pids_badge",
+        "focus": 0,
+        "gap": 1
+      }
+    },
+    {
+      "id": "arrow_pids_model",
+      "type": "arrow",
+      "x": 410,
+      "y": 335,
+      "width": 70,
+      "height": 30,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          70,
+          30
+        ]
+      ],
+      "startBinding": {
+        "elementId": "ecu_pids_badge",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "model_box",
+        "focus": 0,
+        "gap": 1
+      },
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "arrow_mqtt_json",
+      "type": "arrow",
+      "x": 260,
+      "y": 495,
+      "width": 40,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          40,
+          0
+        ]
+      ],
+      "startBinding": {
+        "elementId": "mqtt_mcu",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "json_mqtt_badge",
+        "focus": 0,
+        "gap": 1
+      }
+    },
+    {
+      "id": "arrow_json_model",
+      "type": "arrow",
+      "x": 420,
+      "y": 495,
+      "width": 60,
+      "height": -115,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          60,
+          -115
+        ]
+      ],
+      "startBinding": {
+        "elementId": "json_mqtt_badge",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "model_box",
+        "focus": 0,
+        "gap": 1
+      },
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "arrow_api_stream",
+      "type": "arrow",
+      "x": 580,
+      "y": 210,
+      "width": 0,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          40
+        ]
+      ],
+      "startBinding": {
+        "elementId": "api_box",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "stream_badge",
+        "focus": 0,
+        "gap": 1
+      }
+    },
+    {
+      "id": "arrow_stream_model",
+      "type": "arrow",
+      "x": 580,
+      "y": 290,
+      "width": 0,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          40
+        ]
+      ],
+      "startBinding": {
+        "elementId": "stream_badge",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "model_box",
+        "focus": 0,
+        "gap": 1
+      },
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "arrow_model_state",
+      "type": "arrow",
+      "x": 680,
+      "y": 365,
+      "width": 50,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "startBinding": {
+        "elementId": "model_box",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "cluster_state_badge",
+        "focus": 0,
+        "gap": 1
+      }
+    },
+    {
+      "id": "arrow_state_renderer",
+      "type": "arrow",
+      "x": 850,
+      "y": 365,
+      "width": 50,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ]
+      ],
+      "startBinding": {
+        "elementId": "cluster_state_badge",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "renderer_box",
+        "focus": 0,
+        "gap": 1
+      },
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "arrow_renderer_framebuffer",
+      "type": "arrow",
+      "x": 1000,
+      "y": 400,
+      "width": 0,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          40
+        ]
+      ],
+      "startBinding": {
+        "elementId": "renderer_box",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "framebuffer_badge",
+        "focus": 0,
+        "gap": 1
+      }
+    },
+    {
+      "id": "arrow_framebuffer_display",
+      "type": "arrow",
+      "x": 1000,
+      "y": 480,
+      "width": 0,
+      "height": 40,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          40
+        ]
+      ],
+      "startBinding": {
+        "elementId": "framebuffer_badge",
+        "focus": 0,
+        "gap": 1
+      },
+      "endBinding": {
+        "elementId": "pi_box",
+        "focus": 0,
+        "gap": 1
+      },
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "legend_title",
+      "type": "text",
+      "x": 80,
+      "y": 670,
+      "width": 100,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Legend",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "middle"
+    },
+    {
+      "id": "legend_external",
+      "type": "rectangle",
+      "x": 80,
+      "y": 715,
+      "width": 25,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#69DB7C",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100
+    },
+    {
+      "id": "legend_external_text",
+      "type": "text",
+      "x": 120,
+      "y": 715,
+      "width": 180,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "External Input",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "middle"
+    },
+    {
+      "id": "legend_interface",
+      "type": "rectangle",
+      "x": 320,
+      "y": 715,
+      "width": 25,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#FFD43B",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100
+    },
+    {
+      "id": "legend_interface_text",
+      "type": "text",
+      "x": 360,
+      "y": 715,
+      "width": 200,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Interface / Protocol",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "middle"
+    },
+    {
+      "id": "legend_integration",
+      "type": "rectangle",
+      "x": 590,
+      "y": 715,
+      "width": 25,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#FF922B",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100
+    },
+    {
+      "id": "legend_integration_text",
+      "type": "text",
+      "x": 630,
+      "y": 715,
+      "width": 200,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Application / Integration",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "middle"
+    },
+    {
+      "id": "legend_core",
+      "type": "rectangle",
+      "x": 80,
+      "y": 765,
+      "width": 25,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#FF6B6B",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100
+    },
+    {
+      "id": "legend_core_text",
+      "type": "text",
+      "x": 120,
+      "y": 765,
+      "width": 180,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Core / Domain State",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "middle"
+    },
+    {
+      "id": "legend_rendering",
+      "type": "rectangle",
+      "x": 320,
+      "y": 765,
+      "width": 25,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#CC5DE8",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100
+    },
+    {
+      "id": "legend_rendering_text",
+      "type": "text",
+      "x": 360,
+      "y": 765,
+      "width": 180,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Rendering",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "middle"
+    },
+    {
+      "id": "legend_output",
+      "type": "rectangle",
+      "x": 590,
+      "y": 765,
+      "width": 25,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "#339AF0",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100
+    },
+    {
+      "id": "legend_output_text",
+      "type": "text",
+      "x": 630,
+      "y": 765,
+      "width": 180,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "text": "Hardware / Output",
+      "fontSize": 16,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "middle"
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  },
+  "files": {}
+}

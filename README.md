@@ -6,7 +6,7 @@ fullscreen on a Raspberry Pi and driven by live sensor data.
 The Digifiz is one of the best looking clusters ever fitted to a production car,
 and original units are getting rare, expensive and hard to keep alive. The goal
 here is to save the design: rebuild it in software, pixel for pixel, so it can
-be run on a modern panel — and eventually fitted to my own project car once the
+be run on a modern panel — and eventually fitted to my own project bike once the
 rest of the pieces come together.
 
 Started as a fork of [GFunkbus76/Digifiz-Dash](https://github.com/gfunkbus76),
@@ -237,6 +237,26 @@ and debounce, layout scaling at several panel sizes, the simulator staying
 renderable, MFA mode switching and chip lighting, and the repaint gate. The renderer tests run headless on SDL's dummy
 video driver.
 
+## Architecture
+
+### Now
+
+Sensor data comes in from an Arduino, an OBD-II scanner or MQTT, is turned into
+one signal model, and is drawn by the renderer onto the display.
+
+<img alt="Current architecture: Arduino, OBD-II and MQTT inputs feed the data adapter and signal model, which the renderer draws to the display" src="docs/diagrams/now.png">
+
+### Where it is going
+
+Raw telemetry from the vehicle, a simulator or a recorded ride, processed into
+a derived vehicle state with calibration and fault detection, before it reaches
+the visualizer.
+
+<img alt="Planned architecture: vehicle, simulator and replay inputs produce raw telemetry, which telemetry processing turns into a derived vehicle state for the Digifiz visualizer" src="docs/diagrams/future.png">
+
+The sources are `docs/diagrams/*.excalidraw`; open them at
+[excalidraw.com](https://excalidraw.com) to edit, then re-export the PNGs.
+
 ## Layout of the repository
 
 ```
@@ -254,6 +274,7 @@ digifiz/            the dash itself
   sources/          mqtt, demo, serial, obd
 tools/              simulator, dev runner, intro extraction and trimming
 deploy/             systemd unit and Raspberry Pi notes
+docs/               demo video, architecture diagrams and their sources
 images/, fonts/     artwork
 arduino-node-red/   sketches and notes for the sensor hardware
 tests/
