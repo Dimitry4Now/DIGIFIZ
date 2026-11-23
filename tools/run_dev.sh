@@ -44,8 +44,8 @@ fi
 
 SIM_PID=""
 cleanup() {
-  [ -n "$SIM_PID" ] && kill "$SIM_PID" 2>/dev/null || true
-  [ -n "$BROKER_PID" ] && kill "$BROKER_PID" 2>/dev/null || true
+  if [ -n "$SIM_PID" ]; then kill "$SIM_PID" 2>/dev/null || true; fi
+  if [ -n "$BROKER_PID" ]; then kill "$BROKER_PID" 2>/dev/null || true; fi
 }
 trap cleanup EXIT INT TERM
 

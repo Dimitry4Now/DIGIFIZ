@@ -4,14 +4,12 @@ from __future__ import annotations
 
 import argparse
 import logging
-import os
 import time
 from collections.abc import Iterator
 
 import pygame
 
-from . import config
-from . import __version__
+from . import __version__, config
 from .assets import AssetCache, intro_frame_paths, load_intro_frame
 from .button import MfaButton
 from .layout import Geometry
@@ -297,7 +295,7 @@ def run(args: argparse.Namespace) -> int:
         odometer.odometer = args.odometer
     if args.trip is not None:
         odometer.trip = args.trip
-    state.odometer = odometer.odometer
+    state.odometer = int(odometer.odometer)
     state.trip = float(odometer.trip)
 
     if last_intro_frame is not None:
@@ -377,15 +375,16 @@ def run(args: argparse.Namespace) -> int:
             distance += travelled
             trip += travelled
             state.trip = trip
-            whole = int(distance)
             shown = source.odometer
             if shown is not None:
                 # A scenario driving the digits for show: display it, but keep
                 # it away from the real odometer and so out of odo.txt.
                 state.odometer = shown
-            elif whole != state.odometer:
-                state.odometer = whole
-                odometer.odometer = whole
+            else:
+                state.odometer = int(distance)
+                # The fraction is kept too, or every restart would drop up to
+                # a kilometre: the display shows whole ones, the file does not.
+                odometer.odometer = distance
             odometer.trip = trip
             if save_odometer:
                 odometer.maybe_write()

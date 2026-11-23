@@ -132,5 +132,12 @@ dmypy.json
 venv/
 .DS_Store
 images/intro/
+# The odometer's saved state: written by the dash while it runs, created on
+# the first run, and different on every machine.
+odo.txt
 odo.txt.tmp
+# IDE settings
+.idea/
+# The diagram exporter's dependencies (tools/diagrams: npm ci)
+node_modules/
 .pytest_cache/

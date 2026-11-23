@@ -5,8 +5,7 @@ from __future__ import annotations
 import time
 
 from . import config, mfa
-from .signals import INDICATORS, BY_KEY, FUEL_RESERVE_LITRES
-
+from .signals import BY_KEY, FUEL_RESERVE_LITRES, INDICATORS
 
 #: Inputs that steer the dash instead of being displayed.
 CONTROLS = frozenset({"mfa_mode", "mfa_next"})

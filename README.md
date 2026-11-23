@@ -95,7 +95,8 @@ dash logs a warning and carries on.
 | `--size WxH` | Preview a panel you do not physically have |
 
 Demo distance is never written back to `odo.txt`, so a demo cannot inflate the
-real odometer.
+real odometer. The file is created on the first run (`DIGIFIZ_ODO_FILE` moves
+it) and keeps both counters to a tenth of a kilometre, so restarts lose none.
 
 ## Data sources
 
@@ -231,12 +232,36 @@ inch panel, the KMS/DRM setup and the systemd unit.
 ```bash
 .venv/bin/pip install -r requirements-dev.txt
 .venv/bin/python -m pytest tests -q
+.venv/bin/ruff check .                     # lint; --fix sorts imports
 ```
+
+CI runs the tests on Python 3.11 (Raspberry Pi OS) and 3.12, plus ruff and
+ShellCheck on the tool scripts, for every pull request.
 
 Covers unit-to-frame scaling, the MQTT and serial parsers, odometer persistence
 and debounce, layout scaling at several panel sizes, the simulator staying
 renderable, MFA mode switching and chip lighting, and the repaint gate. The renderer tests run headless on SDL's dummy
 video driver.
+
+## Making the demo video and diagrams
+
+The scripts that made `docs/demo.mp4` and its GIF live in `tools/demo`. They
+drive a real window, so they need an X11 session with `ffmpeg`, `xdotool`,
+`wmctrl` and `gnome-terminal`, and they run the dash from this checkout.
+
+```bash
+tools/demo/record_sweep_demo.sh            # a take of the sweep scenario
+tools/demo/render_demo.sh raw.mp4 docs/demo.mp4 1366x768   # frame it
+.venv/bin/python tools/demo/make_thumbnail.py dash.png thumbnail.png
+```
+
+The architecture diagrams are drawn in Excalidraw (`docs/diagrams/*.excalidraw`)
+and rendered to PNG by `tools/diagrams`, with Node and a Chrome or Chromium:
+
+```bash
+cd tools/diagrams && npm ci
+node export.mjs ../../docs/diagrams ../../docs/diagrams/*.excalidraw
+```
 
 ## Architecture
 
@@ -274,6 +299,8 @@ digifiz/            the dash itself
   simulation.py     synthetic engine behaviour
   sources/          mqtt, demo, serial, obd
 tools/              simulator, dev runner, intro extraction and trimming
+  demo/             recording and rendering the demo videos, the thumbnail
+  diagrams/         exporting docs/diagrams/*.excalidraw to PNG
 deploy/             systemd unit and Raspberry Pi notes
 docs/               demo video, architecture diagrams and their sources
 images/, fonts/     artwork
