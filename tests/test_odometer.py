@@ -1,4 +1,3 @@
-import time
 
 from digifiz import config
 from digifiz.odometer import Odometer, format_file, parse
@@ -68,3 +67,14 @@ def test_part_of_a_kilometre_survives_a_restart(tmp_path):
 def test_reads_files_from_before_the_decimal():
     assert parse("odo:000123\ntrip:4.5\n") == (123.0, 4.5)
     assert format_file(123.0, 4.5) == "odo:000123.0\ntrip:4.5\n"
+
+
+def test_the_file_can_live_elsewhere(monkeypatch, tmp_path):
+    import importlib
+
+    monkeypatch.setenv("DIGIFIZ_ODO_FILE", str(tmp_path / "data" / "odo.txt"))
+    try:
+        assert importlib.reload(config).ODO_FILE == tmp_path / "data" / "odo.txt"
+    finally:
+        monkeypatch.delenv("DIGIFIZ_ODO_FILE")
+        importlib.reload(config)

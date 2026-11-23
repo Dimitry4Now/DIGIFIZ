@@ -13,7 +13,6 @@ ROOT = Path(__file__).resolve().parent.parent
 IMAGE_DIR = ROOT / "images"
 FONT_DIR = ROOT / "fonts"
 INTRO_DIR = IMAGE_DIR / "intro"
-ODO_FILE = ROOT / "odo.txt"
 
 PROJECT_NAME = "Digifiz Dashboard"
 
@@ -67,6 +66,10 @@ MFA_BUTTON_PIN = _env("DIGIFIZ_MFA_BUTTON_PIN", "")
 
 #: A value older than this is drawn as stale rather than as current truth.
 STALE_AFTER = float(_env("DIGIFIZ_STALE_AFTER", "5.0"))
+
+#: The odometer's saved state. Created on the first run; point it at a
+#: writable partition when the root filesystem is mounted read-only.
+ODO_FILE = Path(_env("DIGIFIZ_ODO_FILE", str(ROOT / "odo.txt")))
 
 #: Odometer writes are debounced to protect the SD card.
 ODO_WRITE_INTERVAL = float(_env("DIGIFIZ_ODO_WRITE_INTERVAL", "30.0"))

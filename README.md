@@ -95,7 +95,8 @@ dash logs a warning and carries on.
 | `--size WxH` | Preview a panel you do not physically have |
 
 Demo distance is never written back to `odo.txt`, so a demo cannot inflate the
-real odometer.
+real odometer. The file is created on the first run (`DIGIFIZ_ODO_FILE` moves
+it) and keeps both counters to a tenth of a kilometre, so restarts lose none.
 
 ## Data sources
 

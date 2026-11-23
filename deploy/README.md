@@ -96,4 +96,13 @@ which is comfortable on a 2 GB or larger Pi.
 A cluster gets its power cut rather than shut down. The odometer is written
 atomically (temporary file plus rename) and at most once every 30 seconds, so a
 cut cannot truncate it. If you want to go further, mount the root filesystem
-read-only and keep `odo.txt` on a small writable partition.
+read-only and keep the odometer on a small writable partition:
+`DIGIFIZ_ODO_FILE=/data/odo.txt` in the service's environment.
+
+`odo.txt` is created on the first run and is no longer part of the repository.
+On a Pi set up before that, the first `git pull` would refuse to touch the
+changed file, so keep the reading aside for that one update:
+
+```sh
+cp odo.txt /tmp/odo.txt && git checkout odo.txt && git pull && cp /tmp/odo.txt odo.txt
+```
