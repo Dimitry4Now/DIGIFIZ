@@ -138,4 +138,6 @@ odo.txt
 odo.txt.tmp
 # IDE settings
 .idea/
+# The diagram exporter's dependencies (tools/diagrams: npm ci)
+node_modules/
 .pytest_cache/

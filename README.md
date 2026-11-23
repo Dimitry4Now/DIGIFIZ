@@ -239,6 +239,26 @@ and debounce, layout scaling at several panel sizes, the simulator staying
 renderable, MFA mode switching and chip lighting, and the repaint gate. The renderer tests run headless on SDL's dummy
 video driver.
 
+## Making the demo video and diagrams
+
+The scripts that made `docs/demo.mp4` and its GIF live in `tools/demo`. They
+drive a real window, so they need an X11 session with `ffmpeg`, `xdotool`,
+`wmctrl` and `gnome-terminal`, and they run the dash from this checkout.
+
+```bash
+tools/demo/record_sweep_demo.sh            # a take of the sweep scenario
+tools/demo/render_demo.sh raw.mp4 docs/demo.mp4 1366x768   # frame it
+.venv/bin/python tools/demo/make_thumbnail.py dash.png thumbnail.png
+```
+
+The architecture diagrams are drawn in Excalidraw (`docs/diagrams/*.excalidraw`)
+and rendered to PNG by `tools/diagrams`, with Node and a Chrome or Chromium:
+
+```bash
+cd tools/diagrams && npm ci
+node export.mjs ../../docs/diagrams ../../docs/diagrams/*.excalidraw
+```
+
 ## Architecture
 
 ### Now
@@ -275,6 +295,8 @@ digifiz/            the dash itself
   simulation.py     synthetic engine behaviour
   sources/          mqtt, demo, serial, obd
 tools/              simulator, dev runner, intro extraction and trimming
+  demo/             recording and rendering the demo videos, the thumbnail
+  diagrams/         exporting docs/diagrams/*.excalidraw to PNG
 deploy/             systemd unit and Raspberry Pi notes
 docs/               demo video, architecture diagrams and their sources
 images/, fonts/     artwork
