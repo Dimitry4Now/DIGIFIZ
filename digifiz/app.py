@@ -297,7 +297,7 @@ def run(args: argparse.Namespace) -> int:
         odometer.odometer = args.odometer
     if args.trip is not None:
         odometer.trip = args.trip
-    state.odometer = odometer.odometer
+    state.odometer = int(odometer.odometer)
     state.trip = float(odometer.trip)
 
     if last_intro_frame is not None:
@@ -377,15 +377,16 @@ def run(args: argparse.Namespace) -> int:
             distance += travelled
             trip += travelled
             state.trip = trip
-            whole = int(distance)
             shown = source.odometer
             if shown is not None:
                 # A scenario driving the digits for show: display it, but keep
                 # it away from the real odometer and so out of odo.txt.
                 state.odometer = shown
-            elif whole != state.odometer:
-                state.odometer = whole
-                odometer.odometer = whole
+            else:
+                state.odometer = int(distance)
+                # The fraction is kept too, or every restart would drop up to
+                # a kilometre: the display shows whole ones, the file does not.
+                odometer.odometer = distance
             odometer.trip = trip
             if save_odometer:
                 odometer.maybe_write()
