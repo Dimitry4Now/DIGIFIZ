@@ -238,6 +238,10 @@ inch panel, the KMS/DRM setup and the systemd unit.
 CI runs the tests on Python 3.11 (Raspberry Pi OS) and 3.12, plus ruff and
 ShellCheck on the tool scripts, for every pull request.
 
+Work and testing happen on `develop`; `master` is what is stable, updated by
+merging `develop` into it. Dependabot's updates land on `develop`, so they are
+tested there and reach `master` with the next merge.
+
 Covers unit-to-frame scaling, the MQTT and serial parsers, odometer persistence
 and debounce, layout scaling at several panel sizes, the simulator staying
 renderable, MFA mode switching and chip lighting, and the repaint gate. The renderer tests run headless on SDL's dummy
