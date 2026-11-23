@@ -1,9 +1,10 @@
 name: CI
 
-# Tests, lint and ShellCheck on every pull request and every push to develop.
+# Tests, lint and ShellCheck on every pull request and every push to develop
+# (where work happens) and master (what is stable).
 on:
   push:
-    branches: [develop]
+    branches: [develop, master]
   pull_request:
   workflow_dispatch:
 
