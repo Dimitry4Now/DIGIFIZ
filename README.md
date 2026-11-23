@@ -232,7 +232,11 @@ inch panel, the KMS/DRM setup and the systemd unit.
 ```bash
 .venv/bin/pip install -r requirements-dev.txt
 .venv/bin/python -m pytest tests -q
+.venv/bin/ruff check .                     # lint; --fix sorts imports
 ```
+
+CI runs the tests on Python 3.11 (Raspberry Pi OS) and 3.12, plus ruff and
+ShellCheck on the tool scripts, for every pull request.
 
 Covers unit-to-frame scaling, the MQTT and serial parsers, odometer persistence
 and debounce, layout scaling at several panel sizes, the simulator staying

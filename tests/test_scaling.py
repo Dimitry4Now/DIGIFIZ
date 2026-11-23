@@ -1,5 +1,5 @@
 from digifiz.scaling import fraction_for, frame_for
-from digifiz.signals import BY_KEY, RPM_FRAMES, AUX_FRAMES
+from digifiz.signals import AUX_FRAMES, BY_KEY, RPM_FRAMES
 
 
 def test_rpm_endpoints():

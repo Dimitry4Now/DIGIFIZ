@@ -9,8 +9,7 @@ from collections.abc import Iterator
 
 import pygame
 
-from . import config
-from . import __version__
+from . import __version__, config
 from .assets import AssetCache, intro_frame_paths, load_intro_frame
 from .button import MfaButton
 from .layout import Geometry
