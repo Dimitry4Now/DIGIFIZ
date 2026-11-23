@@ -34,7 +34,7 @@ else
   exit 1
 fi
 
-COUNT=$(ls "$OUT"/frame_*.png 2>/dev/null | wc -l)
+COUNT=$(find "$OUT" -maxdepth 1 -name 'frame_*.png' | wc -l)
 [ "$COUNT" -gt 0 ] || { echo "extraction produced no frames" >&2; exit 1; }
 echo "wrote $COUNT frames to $OUT at ${WIDTH}x${HEIGHT}"
 
